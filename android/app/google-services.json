@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "499859729466",
+    "project_id": "team3-swiper-app",
+    "storage_bucket": "team3-swiper-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499859729466:android:e947708d06bcb657cbd903",
+        "android_client_info": {
+          "package_name": "com.example.swiper_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499859729466-fvppcc6vdli3b3903h0i6javnvc831bi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1asq7e7xAD9vNTrnAP3g9KKh3ApW2f0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499859729466-fvppcc6vdli3b3903h0i6javnvc831bi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "499859729466-hlnn8cl6gk1i4ocqu6ef7oviqu2bhln5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.team3SwiperApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499859729466:android:ff793f6f30631022cbd903",
+        "android_client_info": {
+          "package_name": "com.example.team3_swiper_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499859729466-ik655mk4e9ta9m0rrb6ov7ncbou920ig.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.team3_swiper_app",
+            "certificate_hash": "a1b19e25a2381748c97fc16ac4bd13beb665101d"
+          }
+        },
+        {
+          "client_id": "499859729466-fvppcc6vdli3b3903h0i6javnvc831bi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1asq7e7xAD9vNTrnAP3g9KKh3ApW2f0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499859729466-fvppcc6vdli3b3903h0i6javnvc831bi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "499859729466-hlnn8cl6gk1i4ocqu6ef7oviqu2bhln5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.team3SwiperApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
