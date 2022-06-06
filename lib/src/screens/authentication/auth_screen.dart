@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+import 'package:swiper_app/src/screens/authentication/resetPassword_screen.dart';
 import 'package:swiper_app/src/screens/home/home_screen.dart';
 
 import '../../../service_locators.dart';
@@ -66,7 +67,7 @@ class _AuthScreenState extends State<AuthScreen> {
           } else {
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Chat App'),
+                title: const Text('SwipeR'),
                 backgroundColor: Colors.teal[400],
                 centerTitle: true,
               ),
@@ -144,7 +145,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                         ///login
                                         Column(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.center,
                                           children: [
                                             Text(_authController
                                                     .error?.message ??
@@ -192,6 +193,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                 return null;
                                               },
                                             ),
+                                            const SizedBox(height: 20,),
                                             TextFormField(
                                               obscureText: true,
                                               decoration: InputDecoration(
@@ -237,6 +239,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                 return null;
                                               },
                                             ),
+                                            const SizedBox(height: 50),
                                             ElevatedButton(
                                               onPressed: (_formKey.currentState
                                                           ?.validate() ??
@@ -264,7 +267,13 @@ class _AuthScreenState extends State<AuthScreen> {
                                                       ? const Color(0xFF303030)
                                                       : Colors.grey),
                                               child: const Text('Log in'),
-                                            )
+                                            ),
+                                            const SizedBox(height: 10),
+                                            TextButton(onPressed: (){
+                                              locator<NavigationService>().pushReplacementNamed(resetPasswordScreen.route);
+                                              // locator<NavigationService>().addToRouteStackRecord(AuthScreen.route);
+                                            }, child: const Text('forgot password?'))
+                                            
                                           ],
                                         ),
 
