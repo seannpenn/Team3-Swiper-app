@@ -4,22 +4,21 @@ import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
-import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'package:swiper_app/src/services/image_service.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
 
 import '../../../service_locators.dart';
 import '../../controllers/auth_controller.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String route = 'home-screen';
-  const HomeScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  static const String route = 'profile-screen';
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final AuthController _auth = locator<AuthController>();
   // final ChatController _chatController = ChatController();
 
@@ -28,8 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // final ScrollController _scrollController = ScrollController();
   // ChatCard? card;
   int _selectedIndex = 0;
-
-  
 
   ChatUser? user;
   @override
@@ -41,23 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
-    // _chatController.addListener(scrollToBottom);
+
     super.initState();
   }
 
-  // scrollToBottom() async {
-  //   await Future.delayed(const Duration(milliseconds: 250));
-  //   print('scrolling to bottom');
-  //   _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-  //       curve: Curves.easeIn, duration: const Duration(milliseconds: 250));
-  // }
-
   @override
   void dispose() {
-    // _chatController.removeListener(scrollToBottom);
-    // _messageFN.dispose();
-    // _messageController.dispose();
-    // _chatController.dispose();
     super.dispose();
   }
 
@@ -120,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     trailing: const Icon(Icons.more_vert),
                     onTap: () {
                       print('Home tapped');
-                      locator<NavigationService>().pushReplacementNamed(HomeScreen.route);
+                      // locator<NavigationService>().pushReplacementNamed(HomeScreen.route);
                     },
                   ),
                   ListTile(
@@ -163,13 +149,30 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            const Text('This is home screen'),
-            IconButton(onPressed: () {
-              locator<NavigationService>().pushReplacementNamed(ChatScreen.route);
-            }, icon: const Icon(Icons.chat)),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  ImageService.updateProfileImage();
+                },
+                child: AvatarImage(
+                  uid: FirebaseAuth.instance.currentUser!.uid,
+                  radius: 80,
+                ),
+              ),
+              Text('${user?.username}'),
+              Text('${user?.email}'),
+              const Text('This is profile screen'),
+              // IconButton(
+              //     onPressed: () {
+              //       locator<NavigationService>()
+              //           .pushReplacementNamed(ChatScreen.route);
+              //     },
+              //     icon: const Icon(Icons.chat)),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -190,9 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
             label: 'Messages',
-            
           ),
-          
         ],
         // currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
@@ -205,10 +206,10 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    if(_selectedIndex == 0){
-      locator<NavigationService>().pushReplacementNamed(ProfileScreen.route);
-    }
-    if(_selectedIndex == 2){
+    // if(_selectedIndex == 1){
+    //   locator<NavigationService>().pushReplacementNamed(HomeScreen.route);
+    // }
+    if (_selectedIndex == 2) {
       locator<NavigationService>().pushReplacementNamed(ChatScreen.route);
     }
   }

@@ -5,17 +5,17 @@ import 'package:swiper_app/src/screens/authentication/auth_screen.dart';
 
 import '../../../service_locators.dart';
 
-class resetPasswordScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   static const String route = 'resetPassword-screen';
-  const resetPasswordScreen({
+  const ResetPasswordScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<resetPasswordScreen> createState() => _resetPasswordScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
-class _resetPasswordScreenState extends State<resetPasswordScreen> {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _emailCon = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   // _passCon = TextEditingController(),
@@ -85,13 +85,15 @@ class _resetPasswordScreenState extends State<resetPasswordScreen> {
                   ),
                   const SizedBox(height: 50),
                   ElevatedButton(
-                    onPressed: (_formKey.currentState?.validate() ?? false)
-                        ? () {
-                            _authController.resetPassword(_emailCon.text.trim());
-                            // locator<NavigationService>()
-                            //     .pushReplacementNamed(AuthScreen.route);
-                          }
-                        : null,
+                    onPressed: () => _authController.resetPassword(email:_emailCon.text),
+                    // onPressed: (_formKey.currentState?.validate() ?? false)
+                    //     ? () {
+                    //         _authController.resetPassword(email:_emailCon.text.trim());
+                    //         print('Email sent');
+                    //         // locator<NavigationService>()
+                    //         //     .pushReplacementNamed(AuthScreen.route);
+                    //       }
+                    //     : null,
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),

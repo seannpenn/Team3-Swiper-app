@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
-import 'package:swiper_app/src/screens/authentication/resetPassword_screen.dart';
+import 'package:swiper_app/src/screens/authentication/resetpassword_screen.dart';
+import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'dart:developer' as developer;
 
 import '../../screens/authentication/auth_screen.dart';

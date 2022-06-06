@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
-import 'package:swiper_app/src/screens/authentication/resetPassword_screen.dart';
+import 'package:swiper_app/src/screens/authentication/resetpassword_screen.dart';
 import 'package:swiper_app/src/screens/home/home_screen.dart';
 
 import '../../../service_locators.dart';
@@ -193,7 +192,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                                 return null;
                                               },
                                             ),
-                                            const SizedBox(height: 20,),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
                                             TextFormField(
                                               obscureText: true,
                                               decoration: InputDecoration(
@@ -206,10 +207,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                                       const EdgeInsets.all(0.0),
                                                   child: Icon(
                                                     Icons.lock,
-                                                    color:
-                                                        _passCon.text.isEmpty
-                                                            ? Colors.black
-                                                            : Colors.teal[400],
+                                                    color: _passCon.text.isEmpty
+                                                        ? Colors.black
+                                                        : Colors.teal[400],
                                                   ),
                                                 ),
                                                 border: OutlineInputBorder(
@@ -229,7 +229,6 @@ class _AuthScreenState extends State<AuthScreen> {
                                                           20.0),
                                                 ),
                                               ),
-                                              
                                               controller: _passCon,
                                               validator: (value) {
                                                 if (value == null ||
@@ -269,11 +268,16 @@ class _AuthScreenState extends State<AuthScreen> {
                                               child: const Text('Log in'),
                                             ),
                                             const SizedBox(height: 10),
-                                            TextButton(onPressed: (){
-                                              locator<NavigationService>().pushReplacementNamed(resetPasswordScreen.route);
-                                              // locator<NavigationService>().addToRouteStackRecord(AuthScreen.route);
-                                            }, child: const Text('forgot password?'))
-                                            
+                                            TextButton(
+                                                onPressed: () {
+                                                  locator<NavigationService>()
+                                                      .pushReplacementNamed(
+                                                          ResetPasswordScreen
+                                                              .route);
+                                                  // locator<NavigationService>().addToRouteStackRecord(AuthScreen.route);
+                                                },
+                                                child: const Text(
+                                                    'forgot password?'))
                                           ],
                                         ),
 
@@ -340,10 +344,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                                       const EdgeInsets.all(0.0),
                                                   child: Icon(
                                                     Icons.lock,
-                                                    color:
-                                                        _passCon.text.isEmpty
-                                                            ? Colors.black
-                                                            : Colors.teal[400],
+                                                    color: _passCon.text.isEmpty
+                                                        ? Colors.black
+                                                        : Colors.teal[400],
                                                   ),
                                                 ),
                                                 border: OutlineInputBorder(
@@ -407,7 +410,6 @@ class _AuthScreenState extends State<AuthScreen> {
                                                           20.0),
                                                 ),
                                               ),
-                                              
                                               controller: _pass2Con,
                                               validator: (value) {
                                                 if (value == null ||
@@ -431,10 +433,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                                       const EdgeInsets.all(0.0),
                                                   child: Icon(
                                                     Icons.lock,
-                                                    color:
-                                                        _usernameCon.text.isEmpty
-                                                            ? Colors.black
-                                                            : Colors.teal[400],
+                                                    color: _usernameCon
+                                                            .text.isEmpty
+                                                        ? Colors.black
+                                                        : Colors.teal[400],
                                                   ),
                                                 ),
                                                 border: OutlineInputBorder(
@@ -454,7 +456,6 @@ class _AuthScreenState extends State<AuthScreen> {
                                                           20.0),
                                                 ),
                                               ),
-                                              
                                               controller: _usernameCon,
                                               validator: (value) {
                                                 if (value == null ||

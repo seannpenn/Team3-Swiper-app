@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatUser {
   final String uid, username, email, image;
+  // final List<String> friends;
   Timestamp created, updated;
 
   ChatUser(this.uid, this.username, this.email, this.image, this.created,
@@ -16,6 +17,7 @@ class ChatUser {
       json['image'] ?? '',
       json['created'] ?? Timestamp.now(),
       json['updated'] ?? Timestamp.now(),
+      
     );
   }
 
