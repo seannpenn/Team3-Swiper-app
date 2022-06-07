@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_moment/simple_moment.dart';
-import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 
@@ -14,9 +12,10 @@ class ChatCard extends StatelessWidget {
   ChatCard({Key? key, required this.chat, this.onLongPress, this.onTap})
       : super(key: key);
 
-  final ChatController _chatController = ChatController();
+  // final ChatController _chatController = ChatController();
   final ChatMessage chat;
   final String? currentUserId = FirebaseAuth.instance.currentUser?.uid;
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: onLongPress,

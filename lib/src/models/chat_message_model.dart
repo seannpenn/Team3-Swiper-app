@@ -59,6 +59,7 @@ class ChatMessage {
       .snapshots()
       .map(ChatMessage.fromQuerySnap);
 
+
   updateDetails(String update) {
     FirebaseFirestore.instance
         .collection('chats')

@@ -17,7 +17,6 @@ class ChatUser {
       json['image'] ?? '',
       json['created'] ?? Timestamp.now(),
       json['updated'] ?? Timestamp.now(),
-      
     );
   }
 
@@ -36,11 +35,27 @@ class ChatUser {
         'updated': updated
       };
 
-      static Stream<ChatUser> fromUidStream({required String uid}) {
+  static Stream<ChatUser> fromUidStream({required String uid}) {
     return FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
         .snapshots()
         .map(ChatUser.fromDocumentSnap);
+  }
+
+  static List<ChatUser> fromQuerySnap(QuerySnapshot snap) {
+    try {
+      return snap.docs.map(ChatUser.fromDocumentSnap).toList();
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  static Stream<List<ChatUser>> appUsers() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .snapshots()
+        .map(ChatUser.fromQuerySnap);
   }
 }

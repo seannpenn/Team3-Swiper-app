@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:swiper_app/src/controllers/chat_controller.dart';
+import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'package:swiper_app/src/services/image_service.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
+import 'package:swiper_app/src/widgets/service_card.dart';
 
 import '../../../service_locators.dart';
 import '../../controllers/auth_controller.dart';
@@ -20,8 +23,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final userRef = FirebaseFirestore.instance.collection('users');
   final AuthController _auth = locator<AuthController>();
-  // final ChatController _chatController = ChatController();
+  final cardController = SwipableStackController();
+  final UserController _userController = UserController();
 
   // final TextEditingController _messageController = TextEditingController();
   // final FocusNode _messageFN = FocusNode();
@@ -29,20 +34,26 @@ class _HomeScreenState extends State<HomeScreen> {
   // ChatCard? card;
   int _selectedIndex = 0;
 
-  
+  // ChatUser? user;
+  // String? user;
+  int userCount = 1;
+  ServiceCard? card;
+  List<String> users = [];
 
-  ChatUser? user;
   @override
   void initState() {
-    ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
-      if (mounted) {
-        setState(() {
-          user = value;
-        });
-      }
-    });
+    getUsers();
+    // ChatUser.totalFollowers().then((value) => userCount = value);
+    // ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
+    //   if (mounted) {
+    //     setState(() {
+    //       user = value;
+    //     });
+    //   }
+    // });
     // _chatController.addListener(scrollToBottom);
     super.initState();
+    print(userCount);
   }
 
   // scrollToBottom() async {
@@ -104,12 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
-                  // const DrawerHeader(
-                  //   child: Text('Menu drawer'),
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.red,
-                  //   ),
-                  // ),
                   ListTile(
                     leading: const Icon(
                       Icons.home,
@@ -120,7 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     trailing: const Icon(Icons.more_vert),
                     onTap: () {
                       print('Home tapped');
-                      locator<NavigationService>().pushReplacementNamed(HomeScreen.route);
+                      locator<NavigationService>()
+                          .pushReplacementNamed(HomeScreen.route);
                     },
                   ),
                   ListTile(
@@ -160,17 +166,29 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            const Text('This is home screen'),
-            IconButton(onPressed: () {
-              locator<NavigationService>().pushReplacementNamed(ChatScreen.route);
-            }, icon: const Icon(Icons.chat)),
-          ],
-        ),
+      body: SafeArea(
+        child: AnimatedBuilder(
+            animation: _userController,
+            builder: (context, Widget? w) {
+              return Stack(
+                alignment: AlignmentDirectional.topStart,
+                fit: StackFit.loose,
+                children: [
+                  for (ChatUser user in _userController.users)
+                    SwipableStack(
+                        itemCount: 1,
+                        builder: (BuildContext context, properties) {
+                          return ServiceCard(
+                            uid: user.uid,
+                            urlImage: user.image,
+                            // uid: 'YnalBPZuvCOctbEHUI0u3umpGQW2',
+                            // urlImage:
+                            //     'https://firebasestorage.googleapis.com/v0/b/team3-swiper-app.appspot.com/o/profiles%2FYnalBPZuvCOctbEHUI0u3umpGQW2%2Fimage_picker3548547769139398435.jpg?alt=media&token=e99c19e4-2563-4889-8983-fac91e1273af',
+                          );
+                        })
+                ],
+              );
+            }),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -190,9 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
             label: 'Messages',
-            
           ),
-          
         ],
         // currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
@@ -205,11 +221,23 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    if(_selectedIndex == 0){
+    if (_selectedIndex == 0) {
       locator<NavigationService>().pushReplacementNamed(ProfileScreen.route);
     }
-    if(_selectedIndex == 2){
+    if (_selectedIndex == 2) {
       locator<NavigationService>().pushReplacementNamed(ChatScreen.route);
     }
+  }
+
+  getUsers() {
+    userRef.get().then((QuerySnapshot snapshot) {
+      for (var doc in snapshot.docs) {
+        users.add(doc.id);
+      }
+    });
+  }
+
+  testPrint(String id) {
+    print(id);
   }
 }

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+import 'package:swiper_app/src/models/chat_message_model.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/screens/authentication/auth_screen.dart';
 import 'package:swiper_app/src/screens/home/home_screen.dart';
@@ -19,6 +20,7 @@ class AuthController with ChangeNotifier {
   FirebaseAuthException? error;
   bool working = true;
   final NavigationService nav = locator<NavigationService>();
+  List<ChatMessage> users = [];
 
   ///initializes the stream on creation
   AuthController() {
