@@ -3,6 +3,7 @@ import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/screens/authentication/resetpassword_screen.dart';
 import 'package:swiper_app/src/screens/home/home_screen.dart';
+import 'package:swiper_app/src/screens/landing%20page/landing_screen.dart';
 
 import '../../../service_locators.dart';
 // import '../chat/chat_screen.dart';
@@ -36,7 +37,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   handleLogin() {
     if (_authController.currentUser != null) {
-      locator<NavigationService>().pushReplacementNamed(HomeScreen.route);
+      // const LandingScreen();
+      locator<NavigationService>().pushReplacementNamed(LandingScreen.route);
     }
   }
 

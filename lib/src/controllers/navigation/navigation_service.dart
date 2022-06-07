@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
 import 'package:swiper_app/src/screens/authentication/resetpassword_screen.dart';
+import 'package:swiper_app/src/screens/landing%20page/landing_screen.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'dart:developer' as developer;
 

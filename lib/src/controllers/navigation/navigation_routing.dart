@@ -4,6 +4,8 @@ PageRoute getRoute(RouteSettings settings) {
   switch (settings.name) {
     case AuthScreen.route:
       return SlideLeftRoute(page: const AuthScreen(), settings: settings);
+    case LandingScreen.route:
+      return SlideLeftRoute(page: const LandingScreen(), settings: settings);
     case ChatScreen.route:
       return SlideDownRoute(page: const ChatScreen(), settings: settings);
     case ResetPasswordScreen.route:
