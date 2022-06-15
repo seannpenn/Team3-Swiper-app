@@ -27,7 +27,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // final ScrollController _scrollController = ScrollController();
   // ChatCard? card;
 
-
   ChatUser? user;
   @override
   void initState() {
@@ -50,32 +49,127 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  ImageService.updateProfileImage();
-                },
-                child: AvatarImage(
-                  uid: FirebaseAuth.instance.currentUser!.uid,
-                  radius: 80,
-                ),
-              ),
-              Text('${user?.username}'),
-              Text('${user?.email}'),
-              const Text('This is profile screen'),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 56, 208, 193),
+              Color.fromARGB(194, 1, 61, 85)
             ],
+          ),
+        ),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    ImageService.updateProfileImage();
+                  },
+                  child: AvatarImage(
+                    uid: FirebaseAuth.instance.currentUser!.uid,
+                    radius: 80,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                  child: SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Add bio',
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 500,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40.0),
+                      color: Color.fromARGB(255, 158, 188, 188),
+                    ),
+                    child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Name',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 500,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40.0),
+                      color: Color.fromARGB(255, 158, 188, 188),
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            '@${user?.username}',
+                            style: const TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 500,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40.0),
+                      color: Color.fromARGB(255, 158, 188, 188),
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            '${user?.email}',
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    shadowColor: Color.fromARGB(255, 0, 0, 0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                  ),
+                  child: const Text('Sign Out'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-
 }

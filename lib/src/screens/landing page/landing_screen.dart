@@ -32,7 +32,7 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Swip3'),
+        title: const Text('SwipR'),
         backgroundColor: Colors.teal[400],
         actions: [
           Builder(builder: (context) {
@@ -158,15 +158,15 @@ class _LandingScreenState extends State<LandingScreen> {
     });
     if (_selectedIndex == 0) {
       locator<NavigationService>()
-                          .replaceLastRouteStackRecord(ProfileScreen.route);
+          .replaceLastRouteStackRecord(ProfileScreen.route);
     }
-    if(_selectedIndex == 1){
+    if (_selectedIndex == 1) {
       locator<NavigationService>()
-                          .replaceLastRouteStackRecord(HomeScreen.route);
+          .replaceLastRouteStackRecord(HomeScreen.route);
     }
     if (_selectedIndex == 2) {
       locator<NavigationService>()
-                          .replaceLastRouteStackRecord(ChatHomeScreen.route);
+          .replaceLastRouteStackRecord(ChatHomeScreen.route);
     }
   }
 }
