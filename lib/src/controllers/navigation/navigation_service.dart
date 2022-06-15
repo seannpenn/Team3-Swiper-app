@@ -1,6 +1,7 @@
 // import 'package:chat_app/src/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart';
+import 'package:swiper_app/src/screens/chat/chat_home_screen.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
 import 'package:swiper_app/src/screens/authentication/resetpassword_screen.dart';
 import 'package:swiper_app/src/screens/landing%20page/landing_screen.dart';

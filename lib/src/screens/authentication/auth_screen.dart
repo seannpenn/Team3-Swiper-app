@@ -37,8 +37,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   handleLogin() {
     if (_authController.currentUser != null) {
-      // const LandingScreen();
-      locator<NavigationService>().pushReplacementNamed(LandingScreen.route);
+      // locator<NavigationService>().pushReplacementNamed(LandingScreen.route);
+      locator<NavigationService>().pushNamed(LandingScreen.route);
     }
   }
 

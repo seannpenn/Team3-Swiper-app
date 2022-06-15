@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:swiper_app/service_locators.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+import 'package:swiper_app/src/screens/chat/chat_home_screen.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
 import 'package:swiper_app/src/screens/home/home_screen.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
@@ -23,7 +24,8 @@ class _LandingScreenState extends State<LandingScreen> {
   final List _children = [
     const ProfileScreen(),
     const HomeScreen(),
-    const ChatScreen()
+    // locator<NavigationService>().pushReplacementNamed(HomeScreen.route),
+    const ChatHomeScreen()
   ];
 
   @override
@@ -78,7 +80,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     onTap: () {
                       print('Home tapped');
                       locator<NavigationService>()
-                          .pushReplacementNamed(HomeScreen.route);
+                          .replaceLastRouteStackRecord(HomeScreen.route);
                     },
                   ),
                   ListTile(
@@ -120,6 +122,7 @@ class _LandingScreenState extends State<LandingScreen> {
       ),
       body: _children[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         backgroundColor: Colors.white,
         unselectedIconTheme: const IconThemeData(
@@ -153,11 +156,17 @@ class _LandingScreenState extends State<LandingScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    // if (_selectedIndex == 0) {
-    //   locator<NavigationService>().pushReplacementNamed(ProfileScreen.route);
-    // }
-    // if (_selectedIndex == 2) {
-    //   locator<NavigationService>().pushReplacementNamed(ChatScreen.route);
-    // }
+    if (_selectedIndex == 0) {
+      locator<NavigationService>()
+                          .replaceLastRouteStackRecord(ProfileScreen.route);
+    }
+    if(_selectedIndex == 1){
+      locator<NavigationService>()
+                          .replaceLastRouteStackRecord(HomeScreen.route);
+    }
+    if (_selectedIndex == 2) {
+      locator<NavigationService>()
+                          .replaceLastRouteStackRecord(ChatHomeScreen.route);
+    }
   }
 }

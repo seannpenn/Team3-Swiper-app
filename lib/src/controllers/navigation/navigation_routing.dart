@@ -8,6 +8,8 @@ PageRoute getRoute(RouteSettings settings) {
       return SlideLeftRoute(page: const LandingScreen(), settings: settings);
     case ChatScreen.route:
       return SlideDownRoute(page: const ChatScreen(), settings: settings);
+    case ChatHomeScreen.route:
+      return SlideDownRoute(page: const ChatHomeScreen(), settings: settings);
     case ResetPasswordScreen.route:
       return SlideDownRoute(
           page: const ResetPasswordScreen(), settings: settings);

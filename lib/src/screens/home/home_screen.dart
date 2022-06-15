@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
@@ -28,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final cardController = SwipableStackController();
   final UserController _userController = UserController();
 
-
   ChatUser? user;
   int userCount = 1;
   ServiceCard? card;
@@ -43,17 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
-    // _chatController.addListener(scrollToBottom);
     super.initState();
     print(userCount);
   }
 
   @override
   void dispose() {
-    // _chatController.removeListener(scrollToBottom);
-    // _messageFN.dispose();
-    // _messageController.dispose();
-    // _chatController.dispose();
     super.dispose();
   }
 
@@ -62,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
-      
       body: SafeArea(
         child: AnimatedBuilder(
             animation: _userController,
@@ -72,15 +66,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.loose,
                 children: [
                   for (ChatUser user in _userController.users)
-                    if (user.uid != FirebaseAuth.instance.currentUser!.uid)
-                      SwipableStack(
-                          itemCount: 1,
-                          builder: (BuildContext context, properties) {
-                            return ServiceCard(
-                              uid: user.uid,
-                              urlImage: user.image,
-                            );
-                          })
+                    if (user.uid != FirebaseAuth.instance.currentUser!.uid && user.image != '')
+                      ServiceCard(
+                        user:user,
+                        uid: user.uid,
+                        urlImage: user.image,
+                      ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: FloatingActionButton(
+                      tooltip: 'Reset',
+                      onPressed: () {
+                        cardController.canRewind;
+                      },
+                      child: const Icon(Icons.reset_tv),
+                    ),
+                  )
                 ],
               );
             }),
@@ -88,15 +89,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // getUsers() {
-  //   userRef.get().then((QuerySnapshot snapshot) {
-  //     for (var doc in snapshot.docs) {
-  //       users.add(doc.id);
-  //     }
-  //   });
-  // }
-
-  // testPrint(String id) {
-  //   print(id);
-  // }
 }

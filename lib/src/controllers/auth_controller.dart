@@ -83,8 +83,7 @@ class AuthController with ChangeNotifier {
       UserCredential createdUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (createdUser.user != null) {
-        ChatUser userModel = ChatUser(createdUser.user!.uid, username, email,
-            '', Timestamp.now(), Timestamp.now());
+        ChatUser userModel = ChatUser( uid: createdUser.user!.uid,  username: username, email: email, created: Timestamp.now(), updated: Timestamp.now());
         return FirebaseFirestore.instance
             .collection('users')
             .doc(userModel.uid)
@@ -112,7 +111,6 @@ class AuthController with ChangeNotifier {
   Future resetPassword({required String email}) async {
     try{
       await _auth.sendPasswordResetEmail(email: email);
-      
       
     }
     on FirebaseAuthException catch (e){

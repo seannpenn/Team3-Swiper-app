@@ -2,21 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatUser {
   final String uid, username, email, image;
-  // final List<String> friends;
+  List<String> friends, request;
   Timestamp created, updated;
 
-  ChatUser(this.uid, this.username, this.email, this.image, this.created,
-      this.updated);
+  ChatUser(
+      {required this.uid,
+      required this.username,
+      required this.email,
+      this.image = "",
+      this.friends = const[],
+      this.request = const[],
+      created,
+      updated}): created = created ?? Timestamp.now(), updated = updated ?? Timestamp.now();
 
   static ChatUser fromDocumentSnap(DocumentSnapshot snap) {
     Map<String, dynamic> json = snap.data() as Map<String, dynamic>;
     return ChatUser(
-      snap.id,
-      json['username'] ?? '',
-      json['email'] ?? '',
-      json['image'] ?? '',
-      json['created'] ?? Timestamp.now(),
-      json['updated'] ?? Timestamp.now(),
+      uid: snap.id,
+      friends: json['friends'] != null? List<String>.from(json['friends'])
+      : <String>[],
+      request: json['request'] != null? List<String>.from(json['request'])
+      : <String>[],
+      username: json['username'] ?? '',
+      email: json['email'] ?? '',
+      image: json['image'] ?? " ",
+      created: json['created'] ?? Timestamp.now(),
+      updated: json['updated'] ?? Timestamp.now(),
     );
   }
 
@@ -31,9 +42,17 @@ class ChatUser {
         'username': username,
         'email': email,
         'image': image,
+        'friends': friends,
+        'request': request,
         'created': created,
         'updated': updated
       };
+
+  Future updateRequest(String userUid) {
+    return FirebaseFirestore.instance.collection('users').doc(userUid).update({
+      'request': FieldValue.arrayUnion([uid])
+    });
+  }
 
   static Stream<ChatUser> fromUidStream({required String uid}) {
     return FirebaseFirestore.instance

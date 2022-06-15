@@ -9,7 +9,6 @@ import 'package:swiper_app/src/widgets/avatars.dart';
 import 'package:swiper_app/src/widgets/chat_card.dart';
 import 'package:swiper_app/src/widgets/input_widget.dart';
 
-
 import '../../../service_locators.dart';
 import '../../controllers/auth_controller.dart';
 import '../../models/chat_message_model.dart';
@@ -35,36 +34,40 @@ class _ChatScreenState extends State<ChatScreen> {
   ChatUser? user;
   @override
   void initState() {
-    ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
-      if (mounted) {
-        setState(() {
-          user = value;
-        });
-      }
-    });
+    // ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
+    //   if (mounted) {
+    //     setState(() {
+    //       user = value;
+    //     });
+    //   }
+    // });
     _chatController.addListener(scrollToBottom);
     super.initState();
   }
 
   scrollToBottom() async {
     await Future.delayed(const Duration(milliseconds: 250));
-    print('scrolling to bottom');
+    // print('scrolling to bottom');
     _scrollController.animateTo(_scrollController.position.maxScrollExtent,
         curve: Curves.easeIn, duration: const Duration(milliseconds: 250));
   }
 
-  @override
-  void dispose() {
-    _chatController.removeListener(scrollToBottom);
-    _messageFN.dispose();
-    _messageController.dispose();
-    _chatController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _chatController.removeListener(scrollToBottom);
+  //   _messageFN.dispose();
+  //   _messageController.dispose();
+  //   _chatController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal[400],
+        title: const Text('Chat app'),
+      ),
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
       body: SizedBox(
@@ -163,8 +166,6 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           );
         });
-
-    
   }
 
   showMessageOptions(BuildContext context, ChatMessage chatMessage) {
