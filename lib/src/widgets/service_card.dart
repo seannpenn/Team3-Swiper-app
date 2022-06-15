@@ -5,11 +5,10 @@ import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class ServiceCard extends StatelessWidget {
-
-
   final String uid, urlImage;
   ChatUser user;
-  ServiceCard({Key? key, required this.user, required this.uid, required this.urlImage})
+  ServiceCard(
+      {Key? key, required this.user, required this.uid, required this.urlImage})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,6 @@ class ServiceCard extends StatelessWidget {
           if (direction == SwipeDirection.right) {
             print(uid + 'added');
             user.updateRequest(uid);
-            
           } else {
             print('Rejected');
           }

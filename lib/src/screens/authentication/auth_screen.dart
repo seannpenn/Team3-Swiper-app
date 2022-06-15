@@ -161,7 +161,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                   padding:
                                                       const EdgeInsets.all(0.0),
                                                   child: Icon(
-                                                    Icons.person,
+                                                    Icons.email,
                                                     color:
                                                         _emailCon.text.isEmpty
                                                             ? Colors.black
@@ -301,7 +301,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                   padding:
                                                       const EdgeInsets.all(0.0),
                                                   child: Icon(
-                                                    Icons.lock,
+                                                    Icons.email,
                                                     color:
                                                         _emailCon.text.isEmpty
                                                             ? Colors.black
@@ -434,7 +434,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                   padding:
                                                       const EdgeInsets.all(0.0),
                                                   child: Icon(
-                                                    Icons.lock,
+                                                    Icons.person,
                                                     color: _usernameCon
                                                             .text.isEmpty
                                                         ? Colors.black

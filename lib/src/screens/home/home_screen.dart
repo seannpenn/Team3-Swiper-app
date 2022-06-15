@@ -66,9 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.loose,
                 children: [
                   for (ChatUser user in _userController.users)
-                    if (user.uid != FirebaseAuth.instance.currentUser!.uid && user.image != '')
+                    if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
+                        user.image != '')
                       ServiceCard(
-                        user:user,
+                        user: user,
                         uid: user.uid,
                         urlImage: user.image,
                       ),
@@ -88,5 +89,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }
