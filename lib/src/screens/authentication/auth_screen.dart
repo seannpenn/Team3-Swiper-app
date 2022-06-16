@@ -351,7 +351,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                         // locator<NavigationService>().addToRouteStackRecord(AuthScreen.route);
                                                       },
                                                       child: const Text(
-                                                          'forgot password?'))
+                                                          'Forgot password?'))
                                                 ],
                                               ),
                                             ),
