@@ -1,11 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
+<<<<<<< Updated upstream
 import 'package:swiper_app/src/widgets/avatars.dart';
 
+=======
+>>>>>>> Stashed changes
 import 'package:swiper_app/src/widgets/service_card.dart';
 
 import '../../../service_locators.dart';
