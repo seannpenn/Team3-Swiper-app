@@ -41,7 +41,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       resizeToAvoidBottomInset: true,
       body: Container(
         decoration: const BoxDecoration(
@@ -61,13 +60,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                InkWell(
-                  onTap: () {
-                    ImageService.updateProfileImage();
-                  },
-                  child: AvatarImage(
-                    uid: FirebaseAuth.instance.currentUser!.uid,
-                    radius: 80,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    children: [
+                      const Positioned(
+                        left: 125,
+                        top: 140,
+                        child: Icon(
+                          Icons.add_a_photo,
+                          color: Colors.white,
+                          // size: radius * .95,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          ImageService.updateProfileImage();
+                        },
+                        child: AvatarImage(
+                          uid: FirebaseAuth.instance.currentUser!.uid,
+                          radius: 80,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const Padding(

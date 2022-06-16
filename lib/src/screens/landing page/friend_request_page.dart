@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
+import 'package:swiper_app/src/widgets/avatars.dart';
 
 import 'package:swiper_app/src/widgets/service_card.dart';
 
@@ -135,19 +136,29 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                     //           BorderRadius.all(Radius.circular(20))),
                                     //   color: Colors.green[400],
                                     // ),
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                         left: 20,
                                         right: 20,
                                         top: 10,
                                         bottom: 10),
-                                    child: Column(
+                                    child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          snapshot.data!.request[index],
-                                          style: TextStyle(fontSize: 25),
+                                        AvatarImage(
+                                          uid: snapshot.data!.request[index],
+                                          radius: 20,
                                         ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: UserNameFromDB(
+                                            uid: snapshot.data!.request[index],
+                                          ),
+                                        ),
+                                        // Text(
+                                        //   snapshot.data!.friends[index],
+                                        //   style: TextStyle(fontSize: 25),
+                                        // ),
                                       ],
                                     ),
                                   ),
@@ -155,7 +166,7 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                               ),
                             );
                           })
-                      : Center(
+                      : const Center(
                           child: Text(
                               "That's sad! You don't have any requests!",
                               style: TextStyle(
