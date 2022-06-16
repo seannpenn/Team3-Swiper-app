@@ -9,14 +9,12 @@ class ServiceCard extends StatelessWidget {
   final String uid, urlImage;
   ChatUser? user;
   final AuthController _auth = locator<AuthController>();
-  ServiceCard(
-      {Key? key, required this.uid, required this.urlImage,this.user})
+  ServiceCard({Key? key, required this.uid, required this.urlImage, this.user})
       : super(key: key);
 
   void initState() {
     ChatUser.fromUid(uid: _auth.currentUser!.uid)
-        .then(((value) => {
-          user = value}));
+        .then(((value) => {user = value}));
   }
 
   @override
@@ -44,31 +42,36 @@ class ServiceCard extends StatelessWidget {
         verticalSwipeThreshold: 0.8,
         builder: (BuildContext context, properties) {
           return SizedBox.expand(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(urlImage),
-                    fit: BoxFit.cover,
-                    alignment: const Alignment(-0.3, 0),
-                  ),
-                ),
-                child: Center(
-                    child: Column(
-                  children: [
-                    const Text(
-                      '{Hi Im Sean, I can work out with you :D}',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.orange,
-                          backgroundColor: Colors.black),
-                    ),
-                    Text(uid)
-                  ],
-                )),
+            child: Stack(children: <Widget>[
+              Container(
+                decoration: const BoxDecoration(color: Colors.black38),
               ),
-            ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(urlImage),
+                      fit: BoxFit.cover,
+                      alignment: const Alignment(-0.3, 0),
+                    ),
+                  ),
+                  child: Center(
+                      child: Column(
+                    children: [
+                      const Text(
+                        '{Hi Im Sean, I can work out with you :D}',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.orange,
+                            backgroundColor: Colors.black),
+                      ),
+                      Text(uid)
+                    ],
+                  )),
+                ),
+              ),
+            ]),
           );
         },
       ),

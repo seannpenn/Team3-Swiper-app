@@ -12,7 +12,9 @@ import '../../controllers/auth_controller.dart';
 
 class FriendRequestScreen extends StatefulWidget {
   static const String route = 'friend-request-screen';
-  const FriendRequestScreen({Key? key}) : super(key: key);
+  const FriendRequestScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<FriendRequestScreen> createState() => _FriendRequestScreenState();
@@ -24,7 +26,6 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
   final cardController = SwipableStackController();
   final UserController _userController = UserController();
 
-  ChatUser? currentUser;
   int itemCount = 0;
 
   @override
@@ -54,20 +55,101 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
         title: const Text('Friend Requests'),
       ),
       body: SafeArea(
-        child: AnimatedBuilder(
-            animation: _userController,
-            builder: (context, Widget? w) {
-              return Column(
-                children: [
-                  for (ChatUser user in _userController.users)
-                    if (user.uid == FirebaseAuth.instance.currentUser!.uid)
-                      for (int i = 0; i < user.request.length; i++)
-                      
-                        Text(user.request[i],style: const TextStyle(color: Colors.black, fontSize: 30),)
-                ],
-              );
-            }),
-      ),
+          child: StreamBuilder<ChatUser>(
+              stream: ChatUser.fromUidStream(
+                  uid: FirebaseAuth.instance.currentUser!.uid),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Text('Something went wrong');
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: Column(
+                      children: const [
+                        Text('Fetching Data'),
+                        CircularProgressIndicator()
+                      ],
+                    ),
+                  );
+                }
+                return SizedBox(
+                  height: 1920,
+                  width: 1080,
+                  child: ListView.builder(
+                      itemCount: snapshot.data!.request.length,
+                      itemBuilder: (context, index) {
+                        final request = snapshot.data!.request[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Dismissible(
+                              key: ObjectKey(request),
+                              background: Container(
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                color: Colors.orange,
+                                child: Icon(Icons.check,
+                                    color: Colors.white, size: 32),
+                              ),
+                              secondaryBackground: Container(
+                                alignment: Alignment.centerRight,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                color: Colors.red,
+                                child: Icon(Icons.close,
+                                    color: Colors.white, size: 32),
+                              ),
+                              onDismissed: (direction) async {
+                                switch (direction) {
+                                  case DismissDirection.endToStart:
+                                    if (mounted) {
+                                      setState(() {
+                                        //filled.value
+                                        snapshot.data!.declineRequest(
+                                            snapshot.data!.request[index],
+                                            snapshot.data!.uid);
+                                      });
+                                    }
+                                    break;
+                                  case DismissDirection.startToEnd:
+                                    if (mounted) {
+                                      setState(() {
+                                        //filled.value
+                                        snapshot.data!.acceptRequest(
+                                            snapshot.data!.request[index],
+                                            snapshot.data!.uid);
+                                      });
+                                    }
+                                    break;
+                                }
+                              },
+                              child: Container(
+                                color: Colors.teal,
+                                // decoration: ShapeDecoration(
+                                //   shape: RoundedRectangleBorder(
+                                //       borderRadius:
+                                //           BorderRadius.all(Radius.circular(20))),
+                                //   color: Colors.green[400],
+                                // ),
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10, bottom: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      snapshot.data!.request[index],
+                                      style: TextStyle(fontSize: 25),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                );
+              })),
     );
   }
 }

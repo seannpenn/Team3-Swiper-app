@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:swiper_app/service_locators.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/screens/chat/chat_home_screen.dart';
 
 import 'package:swiper_app/src/screens/home/home_screen.dart';
@@ -28,6 +29,19 @@ class _LandingScreenState extends State<LandingScreen> {
     // locator<NavigationService>().pushReplacementNamed(HomeScreen.route),
     const ChatHomeScreen()
   ];
+  late final ChatUser? currentUser;
+
+  @override
+  void initState() {
+    ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
+      if (mounted) {
+        setState(() {
+          currentUser = value;
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -10,19 +10,23 @@ class ChatUser {
       required this.username,
       required this.email,
       required this.image,
-      this.friends = const[],
-      this.request = const[],
+      this.friends = const [],
+      this.request = const [],
       created,
-      updated}): created = created ?? Timestamp.now(), updated = updated ?? Timestamp.now();
+      updated})
+      : created = created ?? Timestamp.now(),
+        updated = updated ?? Timestamp.now();
 
   static ChatUser fromDocumentSnap(DocumentSnapshot snap) {
     Map<String, dynamic> json = snap.data() as Map<String, dynamic>;
     return ChatUser(
       uid: snap.id,
-      friends: json['friends'] != null? List<String>.from(json['friends'])
-      : <String>[],
-      request: json['request'] != null? List<String>.from(json['request'])
-      : <String>[],
+      friends: json['friends'] != null
+          ? List<String>.from(json['friends'])
+          : <String>[],
+      request: json['request'] != null
+          ? List<String>.from(json['request'])
+          : <String>[],
       username: json['username'] ?? '',
       email: json['email'] ?? '',
       image: json['image'] ?? " ",
@@ -51,6 +55,25 @@ class ChatUser {
   Future sendRequest(String userUid, String currentUser) {
     return FirebaseFirestore.instance.collection('users').doc(userUid).update({
       "request": FieldValue.arrayUnion([currentUser])
+    });
+  }
+
+  Future acceptRequest(String userUid, String currentUser) {
+    declineRequest(userUid, currentUser);
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .update({
+      "friends": FieldValue.arrayUnion([userUid])
+    });
+  }
+
+  Future declineRequest(String userUid, String currentUser) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .update({
+      "request": FieldValue.arrayRemove([userUid])
     });
   }
 

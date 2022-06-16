@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
@@ -9,7 +8,6 @@ import 'package:swiper_app/src/widgets/chat_card.dart';
 
 import '../../../service_locators.dart';
 
-
 class ChatHomeScreen extends StatefulWidget {
   static const String route = 'chat-home-screen';
   const ChatHomeScreen({Key? key}) : super(key: key);
@@ -19,7 +17,6 @@ class ChatHomeScreen extends StatefulWidget {
 }
 
 class _ChatHomeScreenState extends State<ChatHomeScreen> {
-
   final ChatController _chatController = ChatController();
 
   final ScrollController _scrollController = ScrollController();
@@ -38,13 +35,19 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
     // });
     _chatController.addListener(scrollToBottom);
     super.initState();
-
   }
-scrollToBottom() async {
+
+  scrollToBottom() async {
     await Future.delayed(const Duration(milliseconds: 250));
     // print('scrolling to bottom');
     _scrollController.animateTo(_scrollController.position.maxScrollExtent,
         curve: Curves.easeIn, duration: const Duration(milliseconds: 250));
+  }
+
+  @override
+  void dispose() {
+    _chatController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,11 +60,12 @@ scrollToBottom() async {
         width: MediaQuery.of(context).size.width,
         child: Stack(children: [
           SingleChildScrollView(
-            padding: const EdgeInsets.all(8),
+            // padding: const EdgeInsets.all(8),
             controller: _scrollController,
             child: Column(
               children: [
                 Container(
+                  padding: EdgeInsets.all(10),
                   // height: sizeV * 10,
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(5, 0, 0, 0),
@@ -139,7 +143,8 @@ scrollToBottom() async {
                       ),
                     ),
                   ),
-                )
+                ),
+                Divider(color: Color.fromARGB(48, 0, 150, 135), thickness: 2),
               ],
             ),
           )
