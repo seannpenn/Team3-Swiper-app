@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:swiper_app/src/controllers/chat_controller.dart';
-import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
-import 'package:swiper_app/src/screens/chat/chat_screen.dart';
+
 import 'package:swiper_app/src/services/image_service.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
 
@@ -20,12 +18,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthController _auth = locator<AuthController>();
-  // final ChatController _chatController = ChatController();
-
-  // final TextEditingController _messageController = TextEditingController();
-  // final FocusNode _messageFN = FocusNode();
-  // final ScrollController _scrollController = ScrollController();
-  // ChatCard? card;
 
 
   ChatUser? user;

@@ -1,18 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
-import 'package:swiper_app/src/screens/home/home_screen.dart';
-import 'package:swiper_app/src/services/image_service.dart';
-import 'package:swiper_app/src/widgets/avatars.dart';
+
 import 'package:swiper_app/src/widgets/chat_card.dart';
-import 'package:swiper_app/src/widgets/input_widget.dart';
 
 import '../../../service_locators.dart';
-import '../../controllers/auth_controller.dart';
-import '../../models/chat_message_model.dart';
+
 
 class ChatHomeScreen extends StatefulWidget {
   static const String route = 'chat-home-screen';
@@ -23,11 +19,9 @@ class ChatHomeScreen extends StatefulWidget {
 }
 
 class _ChatHomeScreenState extends State<ChatHomeScreen> {
-  final AuthController _auth = locator<AuthController>();
+
   final ChatController _chatController = ChatController();
 
-  final TextEditingController _messageController = TextEditingController();
-  final FocusNode _messageFN = FocusNode();
   final ScrollController _scrollController = ScrollController();
   ChatCard? card;
   // int _selectedIndex = 0;
@@ -44,23 +38,14 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
     // });
     _chatController.addListener(scrollToBottom);
     super.initState();
-  }
 
-  scrollToBottom() async {
+  }
+scrollToBottom() async {
     await Future.delayed(const Duration(milliseconds: 250));
     // print('scrolling to bottom');
     _scrollController.animateTo(_scrollController.position.maxScrollExtent,
         curve: Curves.easeIn, duration: const Duration(milliseconds: 250));
   }
-
-  // @override
-  // void dispose() {
-  //   _chatController.removeListener(scrollToBottom);
-  //   _messageFN.dispose();
-  //   _messageController.dispose();
-  //   _chatController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +129,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                                 width: 60,
                                 padding: const EdgeInsets.only(top: 10.0),
                                 child: const Text(
-                                  'This is some message for text huhuuhuhu wtf is this shit asdasdasdasd',
+                                  'hello',
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               )

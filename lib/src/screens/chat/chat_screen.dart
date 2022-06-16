@@ -1,16 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
-import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
-import 'package:swiper_app/src/screens/home/home_screen.dart';
-import 'package:swiper_app/src/services/image_service.dart';
-import 'package:swiper_app/src/widgets/avatars.dart';
+
 import 'package:swiper_app/src/widgets/chat_card.dart';
 import 'package:swiper_app/src/widgets/input_widget.dart';
 
-import '../../../service_locators.dart';
-import '../../controllers/auth_controller.dart';
 import '../../models/chat_message_model.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -22,7 +17,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final AuthController _auth = locator<AuthController>();
   final ChatController _chatController = ChatController();
 
   final TextEditingController _messageController = TextEditingController();
@@ -193,7 +187,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         child: const Text('Edit')),
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(

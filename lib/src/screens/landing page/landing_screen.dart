@@ -4,7 +4,7 @@ import 'package:swiper_app/service_locators.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/screens/chat/chat_home_screen.dart';
-import 'package:swiper_app/src/screens/chat/chat_screen.dart';
+
 import 'package:swiper_app/src/screens/home/home_screen.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'package:swiper_app/src/services/image_service.dart';

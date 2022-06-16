@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/screens/authentication/auth_screen.dart';
-import 'package:swiper_app/src/screens/home/home_screen.dart';
-import 'package:swiper_app/src/screens/landing%20page/landing_screen.dart';
 import '../service_locators.dart';
 
 class MyApp extends StatelessWidget {

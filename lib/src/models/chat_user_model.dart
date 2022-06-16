@@ -48,9 +48,9 @@ class ChatUser {
         'updated': updated
       };
 
-  Future updateRequest(String userUid) {
+  Future sendRequest(String userUid, String currentUser) {
     return FirebaseFirestore.instance.collection('users').doc(userUid).update({
-      'request': FieldValue.arrayUnion([uid])
+      "request": FieldValue.arrayUnion([currentUser])
     });
   }
 

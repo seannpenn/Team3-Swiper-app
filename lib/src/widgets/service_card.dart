@@ -5,12 +5,17 @@ import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class ServiceCard extends StatelessWidget {
-
-
+  final AuthController _auth = locator<AuthController>();
   final String uid, urlImage;
-  ChatUser user;
-  ServiceCard({Key? key, required this.user, required this.uid, required this.urlImage})
+  ChatUser? user;
+  ServiceCard({Key? key, required this.uid, required this.urlImage})
       : super(key: key);
+
+  void initState() {
+    ChatUser.fromUid(uid: _auth.currentUser!.uid)
+        .then(((value) => {user = value}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,15 +28,17 @@ class ServiceCard extends StatelessWidget {
           return allowed.contains(directions);
         },
         onSwipeCompleted: (index, direction) {
-          if (direction == SwipeDirection.right) {
-            print(uid + 'added');
-            user.updateRequest(uid);
-            
-          } else {
-            print('Rejected');
-          }
+          // if (direction == SwipeDirection.right) {
+          //   print('Rejected');
+          // } else {
+          //   print(uid + 'added');
+
+          //   user!.sendRequest(uid, user!.uid);
+          // }
           print('$index, $direction');
         },
+        horizontalSwipeThreshold: 0.8,
+        verticalSwipeThreshold: 0.8,
         builder: (BuildContext context, properties) {
           return SizedBox.expand(
             child: ClipRRect(
