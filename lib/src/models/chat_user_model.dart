@@ -9,7 +9,7 @@ class ChatUser {
       {required this.uid,
       required this.username,
       required this.email,
-      this.image = "",
+      required this.image,
       this.friends = const[],
       this.request = const[],
       created,

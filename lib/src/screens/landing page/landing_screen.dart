@@ -6,6 +6,7 @@ import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/screens/chat/chat_home_screen.dart';
 
 import 'package:swiper_app/src/screens/home/home_screen.dart';
+import 'package:swiper_app/src/screens/landing%20page/friend_request_page.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'package:swiper_app/src/services/image_service.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
@@ -69,18 +70,35 @@ class _LandingScreenState extends State<LandingScreen> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
+                  // ListTile(
+                  //   leading: const Icon(
+                  //     Icons.home,
+                  //     size: 40,
+                  //   ),
+                  //   title: const Center(child: Text('Home')),
+                  //   // subtitle: const Text("This is the 1st item"),
+                  //   trailing: const Icon(Icons.more_vert),
+                  //   onTap: () {
+                  //     print('Home tapped');
+                  //     locator<NavigationService>()
+                  //         .replaceLastRouteStackRecord(HomeScreen.route);
+                  //   },
+                  // ),
                   ListTile(
                     leading: const Icon(
-                      Icons.home,
+                      Icons.add,
                       size: 40,
                     ),
-                    title: const Center(child: Text('Home')),
+                    title: const Center(child: Text('Requests')),
                     // subtitle: const Text("This is the 1st item"),
                     trailing: const Icon(Icons.more_vert),
                     onTap: () {
-                      print('Home tapped');
-                      locator<NavigationService>()
-                          .replaceLastRouteStackRecord(HomeScreen.route);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FriendRequestScreen()),
+                      );
+                      print('Requests tapped');
                     },
                   ),
                   ListTile(

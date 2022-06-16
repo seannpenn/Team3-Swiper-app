@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/service_locators.dart';
@@ -9,12 +10,13 @@ class ServiceCard extends StatelessWidget {
   ChatUser? user;
   final AuthController _auth = locator<AuthController>();
   ServiceCard(
-      {Key? key, required this.uid, required this.urlImage})
+      {Key? key, required this.uid, required this.urlImage,this.user})
       : super(key: key);
 
   void initState() {
     ChatUser.fromUid(uid: _auth.currentUser!.uid)
-        .then(((value) => {user = value}));
+        .then(((value) => {
+          user = value}));
   }
 
   @override
@@ -30,6 +32,7 @@ class ServiceCard extends StatelessWidget {
         },
         onSwipeCompleted: (index, direction) {
           if (direction == SwipeDirection.right) {
+            print(user!.uid);
             print(uid + 'added');
             user!.sendRequest(uid, user!.uid);
           } else {
