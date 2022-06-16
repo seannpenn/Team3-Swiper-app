@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
+import 'package:swiper_app/src/widgets/avatars.dart';
 
 import 'package:swiper_app/src/widgets/service_card.dart';
 
@@ -90,14 +91,14 @@ class _FriendScreenState extends State<FriendScreen> {
                                 alignment: Alignment.centerLeft,
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 color: Colors.red,
-                                child: Icon(Icons.close,
+                                child: const Icon(Icons.close,
                                     color: Colors.white, size: 32),
                               ),
                               secondaryBackground: Container(
                                 alignment: Alignment.centerRight,
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 color: Colors.orange,
-                                child: Icon(Icons.chat,
+                                child: const Icon(Icons.chat,
                                     color: Colors.white, size: 32),
                               ),
                               onDismissed: (direction) async {
@@ -106,9 +107,7 @@ class _FriendScreenState extends State<FriendScreen> {
                                     if (mounted) {
                                       setState(() {
                                         //filled.value
-                                        snapshot.data!.declineRequest(
-                                            snapshot.data!.request[index],
-                                            snapshot.data!.uid);
+                                        
                                       });
                                     }
                                     break;
@@ -116,7 +115,7 @@ class _FriendScreenState extends State<FriendScreen> {
                                     if (mounted) {
                                       setState(() {
                                         //filled.value
-                                        snapshot.data!.acceptRequest(
+                                        snapshot.data!.deleteFriend(
                                             snapshot.data!.request[index],
                                             snapshot.data!.uid);
                                       });
@@ -126,16 +125,25 @@ class _FriendScreenState extends State<FriendScreen> {
                               },
                               child: Container(
                                 color: Colors.teal,
-                                
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     left: 20, right: 20, top: 10, bottom: 10),
-                                child: Column(
+                                child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      snapshot.data!.friends[index],
-                                      style: TextStyle(fontSize: 25),
+                                    AvatarImage(
+                                      uid: snapshot.data!.friends[index],
+                                      radius: 20,
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: UserNameFromDB(
+                                        uid: snapshot.data!.friends[index],
+                                      ),
+                                    ),
+                                    // Text(
+                                    //   snapshot.data!.friends[index],
+                                    //   style: TextStyle(fontSize: 25),
+                                    // ),
                                   ],
                                 ),
                               ),

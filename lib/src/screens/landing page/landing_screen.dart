@@ -68,9 +68,9 @@ class _LandingScreenState extends State<LandingScreen> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      ImageService.updateProfileImage();
-                    },
+                    // onTap: () {
+                    //   ImageService.updateProfileImage();
+                    // },
                     child: AvatarImage(
                         uid: FirebaseAuth.instance.currentUser!.uid),
                   ),

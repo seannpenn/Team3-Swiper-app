@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
+import 'package:swiper_app/src/widgets/avatars.dart';
 
 import 'package:swiper_app/src/widgets/service_card.dart';
 
@@ -73,93 +74,123 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                     ),
                   );
                 }
-                return SizedBox(
-                  height: 1920,
-                  width: 1080,
-                  child: snapshot.data!.request.isNotEmpty
-                      ? ListView.builder(
-                          itemCount: snapshot.data!.request.length,
-                          itemBuilder: (context, index) {
-                            final request = snapshot.data!.request[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15.0),
-                                child: Dismissible(
-                                  key: ObjectKey(request),
-                                  background: Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    color: Colors.orange,
-                                    child: Icon(Icons.check,
-                                        color: Colors.white, size: 32),
-                                  ),
-                                  secondaryBackground: Container(
-                                    alignment: Alignment.centerRight,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    color: Colors.red,
-                                    child: Icon(Icons.close,
-                                        color: Colors.white, size: 32),
-                                  ),
-                                  onDismissed: (direction) async {
-                                    switch (direction) {
-                                      case DismissDirection.endToStart:
-                                        if (mounted) {
-                                          setState(() {
-                                            //filled.value
-                                            snapshot.data!.declineRequest(
-                                                snapshot.data!.request[index],
-                                                snapshot.data!.uid);
-                                          });
-                                        }
-                                        break;
-                                      case DismissDirection.startToEnd:
-                                        if (mounted) {
-                                          setState(() {
-                                            //filled.value
-                                            snapshot.data!.acceptRequest(
-                                                snapshot.data!.request[index],
-                                                snapshot.data!.uid);
-                                          });
-                                        }
-                                        break;
-                                    }
-                                  },
-                                  child: Container(
-                                    color: Colors.teal,
-                                    // decoration: ShapeDecoration(
-                                    //   shape: RoundedRectangleBorder(
-                                    //       borderRadius:
-                                    //           BorderRadius.all(Radius.circular(20))),
-                                    //   color: Colors.green[400],
-                                    // ),
-                                    padding: EdgeInsets.only(
-                                        left: 20,
-                                        right: 20,
-                                        top: 10,
-                                        bottom: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          snapshot.data!.request[index],
-                                          style: TextStyle(fontSize: 25),
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: (){},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text('Pending Request'),
+                            Icon(Icons.arrow_drop_down),
+                          ],
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Requested to add you'),
+                      ),
+                      SizedBox(
+                        height: 1920,
+                        width: 1080,
+                        child: snapshot.data!.request.isNotEmpty
+                            ? ListView.builder(
+                                itemCount: snapshot.data!.request.length,
+                                itemBuilder: (context, index) {
+                                  final request = snapshot.data!.request[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      child: Dismissible(
+                                        key: ObjectKey(request),
+                                        background: Container(
+                                          alignment: Alignment.centerLeft,
+                                          padding:
+                                              EdgeInsets.symmetric(horizontal: 20),
+                                          color: Colors.orange,
+                                          child: Icon(Icons.check,
+                                              color: Colors.white, size: 32),
                                         ),
-                                      ],
+                                        secondaryBackground: Container(
+                                          alignment: Alignment.centerRight,
+                                          padding:
+                                              EdgeInsets.symmetric(horizontal: 20),
+                                          color: Colors.red,
+                                          child: Icon(Icons.close,
+                                              color: Colors.white, size: 32),
+                                        ),
+                                        onDismissed: (direction) async {
+                                          switch (direction) {
+                                            case DismissDirection.endToStart:
+                                              if (mounted) {
+                                                setState(() {
+                                                  //filled.value
+                                                  snapshot.data!.declineRequest(
+                                                      snapshot.data!.request[index],
+                                                      snapshot.data!.uid);
+                                                });
+                                              }
+                                              break;
+                                            case DismissDirection.startToEnd:
+                                              if (mounted) {
+                                                setState(() {
+                                                  //filled.value
+                                                  snapshot.data!.acceptRequest(
+                                                      snapshot.data!.request[index],
+                                                      snapshot.data!.uid);
+                                                });
+                                              }
+                                              break;
+                                          }
+                                        },
+                                        child: Container(
+                                          color: Colors.teal,
+                                          // decoration: ShapeDecoration(
+                                          //   shape: RoundedRectangleBorder(
+                                          //       borderRadius:
+                                          //           BorderRadius.all(Radius.circular(20))),
+                                          //   color: Colors.green[400],
+                                          // ),
+                                          padding: const EdgeInsets.only(
+                                              left: 20,
+                                              right: 20,
+                                              top: 10,
+                                              bottom: 10),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              AvatarImage(
+                                                uid: snapshot.data!.request[index],
+                                                radius: 20,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: UserNameFromDB(
+                                                  uid: snapshot.data!.request[index],
+                                                ),
+                                              ),
+                                              // Text(
+                                              //   snapshot.data!.friends[index],
+                                              //   style: TextStyle(fontSize: 25),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          })
-                      : Center(
-                          child: Text(
-                              "That's sad! You don't have any requests!",
-                              style: TextStyle(
-                                  fontSize: 18, color: Colors.black26))),
+                                  );
+                                })
+                            : const Center(
+                                child: Text(
+                                    "That's sad! You don't have any requests!",
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.black26))),
+                      ),
+                    ],
+                  ),
                 );
               })),
     );
