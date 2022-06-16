@@ -47,6 +47,8 @@ class ServiceCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.3), BlendMode.multiply),
                     image: NetworkImage(urlImage),
                     fit: BoxFit.cover,
                     alignment: const Alignment(-0.3, 0),

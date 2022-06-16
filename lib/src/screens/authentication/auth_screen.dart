@@ -53,6 +53,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return AnimatedBuilder(
         animation: _authController,
         builder: (context, Widget? w) {
@@ -66,446 +67,556 @@ class _AuthScreenState extends State<AuthScreen> {
             );
           } else {
             return Scaffold(
-              appBar: AppBar(
-                title: const Text('SwipeR'),
-                backgroundColor: Colors.teal[400],
-                centerTitle: true,
-              ),
+              resizeToAvoidBottomInset: true,
+              // appBar: AppBar(
+              //   title: const Text('SwipeR'),
+              //   backgroundColor: Colors.teal[400],
+              //   centerTitle: true,
+              // ),
               body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Center(
-                    child: AspectRatio(
-                      aspectRatio: 4 / 5,
-                      child: Container(
-                        // decoration: BoxDecoration(
-                        //   color: ,
-                        // ),
-                        padding: const EdgeInsets.all(16),
-                        child: Center(
-                          child: Form(
-                            key: _formKey,
-                            onChanged: () {
-                              _formKey.currentState?.validate();
-                              if (mounted) {
-                                setState(() {});
-                              }
-                            },
-                            child: DefaultTabController(
-                              length: 2,
-                              initialIndex: 0,
-                              child: Column(
-                                children: [
-                                  TabBar(tabs: [
-                                    Tab(
-                                      // icon: Icon(Icons.login, color: Colors.black,),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: const [
-                                          Icon(
-                                            Icons.login,
-                                            color: Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'Log In',
-                                            style: TextStyle(
-                                                color: Colors.black87),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Tab(
-                                      // icon: Icon(Icons.login, color: Colors.black,),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: const [
-                                          Icon(
-                                            Icons.app_registration_rounded,
-                                            color: Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'Register',
-                                            style: TextStyle(
-                                                color: Colors.black87),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ]),
-                                  Expanded(
-                                    child: TabBarView(
-                                      children: [
-                                        ///login
-                                        Column(
+                child: Stack(children: <Widget>[
+                  Container(
+                    height: size.height,
+                    width: size.width,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          Color.fromARGB(255, 56, 208, 193),
+                          Color.fromARGB(194, 1, 61, 85)
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: (size.height / 100) * 10,
+                    left: 1,
+                    right: 1,
+                    child: Center(
+                        child: Text('SwipeR',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 36))),
+                  ),
+                  Positioned(
+                    bottom: 1,
+                    child: Container(
+                      height: (size.height / 100) * 70,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50))),
+                      child: Center(
+                        child: Container(
+                          // decoration: BoxDecoration(
+                          //   color: ,
+                          // ),
+                          padding: const EdgeInsets.all(16),
+                          child: Center(
+                            child: Form(
+                              key: _formKey,
+                              onChanged: () {
+                                _formKey.currentState?.validate();
+                                if (mounted) {
+                                  setState(() {});
+                                }
+                              },
+                              child: DefaultTabController(
+                                length: 2,
+                                initialIndex: 0,
+                                child: Column(
+                                  children: [
+                                    TabBar(tabs: [
+                                      Tab(
+                                        // icon: Icon(Icons.login, color: Colors.black,),
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          children: [
-                                            Text(_authController
-                                                    .error?.message ??
-                                                ''),
-                                            TextFormField(
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                hintText: "Email",
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  child: Icon(
-                                                    Icons.email,
-                                                    color:
-                                                        _emailCon.text.isEmpty
-                                                            ? Colors.black
-                                                            : Colors.teal[400],
-                                                  ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  borderSide: const BorderSide(
-                                                      width: 3.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Color(0xFF26A69A),
-                                                      width: 3.0),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                              controller: _emailCon,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter your email';
-                                                }
-                                                return null;
-                                              },
+                                          children: const [
+                                            Icon(
+                                              Icons.login,
+                                              color: Colors.black,
                                             ),
-                                            const SizedBox(
-                                              height: 20,
+                                            SizedBox(
+                                              width: 10,
                                             ),
-                                            TextFormField(
-                                              obscureText: true,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                hintText: "password",
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  child: Icon(
-                                                    Icons.lock,
-                                                    color: _passCon.text.isEmpty
-                                                        ? Colors.black
-                                                        : Colors.teal[400],
-                                                  ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  borderSide: const BorderSide(
-                                                      width: 3.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Color(0xFF26A69A),
-                                                      width: 3.0),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                              controller: _passCon,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter your password';
-                                                }
-                                                return null;
-                                              },
+                                            Text(
+                                              'Log In',
+                                              style: TextStyle(
+                                                  color: Colors.black87),
                                             ),
-                                            const SizedBox(height: 50),
-                                            ElevatedButton(
-                                              onPressed: (_formKey.currentState
-                                                          ?.validate() ??
-                                                      false)
-                                                  ? () {
-                                                      _authController.login(
-                                                          _emailCon.text.trim(),
-                                                          _passCon.text.trim());
-                                                    }
-                                                  : null,
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 50,
-                                                      vertical: 20),
-                                                  primary: (_formKey
-                                                              .currentState
-                                                              ?.validate() ??
-                                                          false)
-                                                      ? const Color(0xFF303030)
-                                                      : Colors.grey),
-                                              child: const Text('Log in'),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            TextButton(
-                                                onPressed: () {
-                                                  locator<NavigationService>()
-                                                      .pushReplacementNamed(
-                                                          ResetPasswordScreen
-                                                              .route);
-                                                  // locator<NavigationService>().addToRouteStackRecord(AuthScreen.route);
-                                                },
-                                                child: const Text(
-                                                    'forgot password?'))
                                           ],
                                         ),
-
-                                        ///register
-                                        Column(
+                                      ),
+                                      Tab(
+                                        // icon: Icon(Icons.login, color: Colors.black,),
+                                        child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(_authController
-                                                    .error?.message ??
-                                                ''),
-                                            TextFormField(
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                hintText: "Email",
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  child: Icon(
-                                                    Icons.email,
-                                                    color:
-                                                        _emailCon.text.isEmpty
+                                              MainAxisAlignment.center,
+                                          children: const [
+                                            Icon(
+                                              Icons.app_registration_rounded,
+                                              color: Colors.black,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              'Register',
+                                              style: TextStyle(
+                                                  color: Colors.black87),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]),
+                                    Expanded(
+                                      child: TabBarView(
+                                        children: [
+                                          ///login
+                                          SingleChildScrollView(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 30.0,
+                                                  right: 30,
+                                                  top: 20),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(_authController
+                                                          .error?.message ??
+                                                      ''),
+                                                  TextFormField(
+                                                    decoration: InputDecoration(
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .fromLTRB(
+                                                              20.0,
+                                                              20.0,
+                                                              20.0,
+                                                              20.0),
+                                                      hintText: "Email",
+                                                      prefixIcon: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(0.0),
+                                                        child: Icon(
+                                                          Icons.email,
+                                                          color: _emailCon
+                                                                  .text.isEmpty
+                                                              ? Colors.black
+                                                              : Colors
+                                                                  .teal[400],
+                                                        ),
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                width: 3.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                color: Color(
+                                                                    0xFF26A69A),
+                                                                width: 3.0),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                    ),
+                                                    controller: _emailCon,
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please enter your email';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  TextFormField(
+                                                    obscureText: true,
+                                                    decoration: InputDecoration(
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .fromLTRB(
+                                                              20.0,
+                                                              20.0,
+                                                              20.0,
+                                                              20.0),
+                                                      hintText: "password",
+                                                      prefixIcon: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(0.0),
+                                                        child: Icon(
+                                                          Icons.lock,
+                                                          color: _passCon
+                                                                  .text.isEmpty
+                                                              ? Colors.black
+                                                              : Colors
+                                                                  .teal[400],
+                                                        ),
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                width: 3.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                color: Color(
+                                                                    0xFF26A69A),
+                                                                width: 3.0),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                    ),
+                                                    controller: _passCon,
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please enter your password';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                  const SizedBox(height: 50),
+                                                  ElevatedButton(
+                                                    onPressed: (_formKey
+                                                                .currentState
+                                                                ?.validate() ??
+                                                            false)
+                                                        ? () {
+                                                            _authController
+                                                                .login(
+                                                                    _emailCon
+                                                                        .text
+                                                                        .trim(),
+                                                                    _passCon
+                                                                        .text
+                                                                        .trim());
+                                                          }
+                                                        : null,
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                            ),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        50,
+                                                                    vertical:
+                                                                        20),
+                                                            primary: (_formKey
+                                                                        .currentState
+                                                                        ?.validate() ??
+                                                                    false)
+                                                                ? const Color(
+                                                                    0xFF303030)
+                                                                : Colors.grey),
+                                                    child: const Text('Log in'),
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        locator<NavigationService>()
+                                                            .pushReplacementNamed(
+                                                                ResetPasswordScreen
+                                                                    .route);
+                                                        // locator<NavigationService>().addToRouteStackRecord(AuthScreen.route);
+                                                      },
+                                                      child: const Text(
+                                                          'forgot password?'))
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          ///register
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 30.0, right: 30),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Text(_authController
+                                                        .error?.message ??
+                                                    ''),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .fromLTRB(20.0,
+                                                            20.0, 20.0, 20.0),
+                                                    hintText: "Email",
+                                                    prefixIcon: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0.0),
+                                                      child: Icon(
+                                                        Icons.email,
+                                                        color: _emailCon
+                                                                .text.isEmpty
                                                             ? Colors.black
                                                             : Colors.teal[400],
+                                                      ),
+                                                    ),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              width: 3.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Color(
+                                                                  0xFF26A69A),
+                                                              width: 3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
                                                   ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  borderSide: const BorderSide(
-                                                      width: 3.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Color(0xFF26A69A),
-                                                      width: 3.0),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                              controller: _emailCon,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter your email';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                            TextFormField(
-                                              obscureText: true,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                hintText: "Password",
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  child: Icon(
-                                                    Icons.lock,
-                                                    color: _passCon.text.isEmpty
-                                                        ? Colors.black
-                                                        : Colors.teal[400],
-                                                  ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  borderSide: const BorderSide(
-                                                      width: 3.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Color(0xFF26A69A),
-                                                      width: 3.0),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                              controller: _passCon,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter your password';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                            TextFormField(
-                                              obscureText: true,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                hintText: "Confirm Password",
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  child: Icon(
-                                                    Icons.lock,
-                                                    color:
-                                                        _pass2Con.text.isEmpty
-                                                            ? Colors.black
-                                                            : Colors.teal[400],
-                                                  ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  borderSide: const BorderSide(
-                                                      width: 3.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Color(0xFF26A69A),
-                                                      width: 3.0),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                              controller: _pass2Con,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please confirm your password';
-                                                } else if (_passCon.text !=
-                                                    _pass2Con.text) {
-                                                  return 'Passwords do not match!';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                            TextFormField(
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        20.0, 20.0, 20.0, 20.0),
-                                                hintText: "Enter username",
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  child: Icon(
-                                                    Icons.person,
-                                                    color: _usernameCon
-                                                            .text.isEmpty
-                                                        ? Colors.black
-                                                        : Colors.teal[400],
-                                                  ),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  borderSide: const BorderSide(
-                                                      width: 3.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Color(0xFF26A69A),
-                                                      width: 3.0),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                              controller: _usernameCon,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Please enter username';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: (_formKey.currentState
-                                                          ?.validate() ??
-                                                      false)
-                                                  ? () {
-                                                      _authController.register(
-                                                          email: _emailCon.text
-                                                              .trim(),
-                                                          password: _passCon
-                                                              .text
-                                                              .trim(),
-                                                          username: _usernameCon
-                                                              .text
-                                                              .trim());
+                                                  controller: _emailCon,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter your email';
                                                     }
-                                                  : null,
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .fromLTRB(20.0,
+                                                            20.0, 20.0, 20.0),
+                                                    hintText: "Password",
+                                                    prefixIcon: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0.0),
+                                                      child: Icon(
+                                                        Icons.lock,
+                                                        color: _passCon
+                                                                .text.isEmpty
+                                                            ? Colors.black
+                                                            : Colors.teal[400],
+                                                      ),
+                                                    ),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              width: 3.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Color(
+                                                                  0xFF26A69A),
+                                                              width: 3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
                                                   ),
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 50,
-                                                      vertical: 20),
-                                                  primary: (_formKey
+                                                  controller: _passCon,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter your password';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .fromLTRB(20.0,
+                                                            20.0, 20.0, 20.0),
+                                                    hintText:
+                                                        "Confirm Password",
+                                                    prefixIcon: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0.0),
+                                                      child: Icon(
+                                                        Icons.lock,
+                                                        color: _pass2Con
+                                                                .text.isEmpty
+                                                            ? Colors.black
+                                                            : Colors.teal[400],
+                                                      ),
+                                                    ),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              width: 3.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Color(
+                                                                  0xFF26A69A),
+                                                              width: 3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
+                                                  ),
+                                                  controller: _pass2Con,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please confirm your password';
+                                                    } else if (_passCon.text !=
+                                                        _pass2Con.text) {
+                                                      return 'Passwords do not match!';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .fromLTRB(20.0,
+                                                            20.0, 20.0, 20.0),
+                                                    hintText: "Enter username",
+                                                    prefixIcon: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0.0),
+                                                      child: Icon(
+                                                        Icons.person,
+                                                        color: _usernameCon
+                                                                .text.isEmpty
+                                                            ? Colors.black
+                                                            : Colors.teal[400],
+                                                      ),
+                                                    ),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              width: 3.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Color(
+                                                                  0xFF26A69A),
+                                                              width: 3.0),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                    ),
+                                                  ),
+                                                  controller: _usernameCon,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter username';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: (_formKey
                                                               .currentState
                                                               ?.validate() ??
                                                           false)
-                                                      ? const Color(0xFF303030)
-                                                      : Colors.grey),
-                                              child: const Text('Register'),
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                                                      ? () {
+                                                          _authController.register(
+                                                              email: _emailCon
+                                                                  .text
+                                                                  .trim(),
+                                                              password: _passCon
+                                                                  .text
+                                                                  .trim(),
+                                                              username:
+                                                                  _usernameCon
+                                                                      .text
+                                                                      .trim());
+                                                        }
+                                                      : null,
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      50,
+                                                                  vertical: 20),
+                                                          primary: (_formKey
+                                                                      .currentState
+                                                                      ?.validate() ??
+                                                                  false)
+                                                              ? const Color(
+                                                                  0xFF303030)
+                                                              : Colors.grey),
+                                                  child: const Text('Register'),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -513,7 +624,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                   ),
-                ),
+                ]),
               ),
             );
           }
