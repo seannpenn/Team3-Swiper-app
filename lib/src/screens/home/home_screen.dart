@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: AnimatedBuilder(
             animation: _userController,
             builder: (context, Widget? w) {
+<<<<<<< HEAD
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Stack(
@@ -75,6 +76,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           cardController.canRewind;
                         },
                         child: const Icon(Icons.reset_tv),
+=======
+              return Stack(
+                alignment: AlignmentDirectional.topStart,
+                fit: StackFit.loose,
+                children: [
+                  for (ChatUser user in _userController.users)
+                    if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
+                        user.image != '')
+                      ServiceCard(
+                        user: user,
+                        uid: user.uid,
+                        urlImage: user.image,
+>>>>>>> seanpen
                       ),
                     ),
                   ],
@@ -84,5 +98,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }
