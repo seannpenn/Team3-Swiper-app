@@ -41,8 +41,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< Updated upstream
       
       resizeToAvoidBottomInset: true,
+=======
+      resizeToAvoidBottomInset: false,
+>>>>>>> Stashed changes
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
