@@ -158,7 +158,8 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                       : Center(
                           child: Text(
                               "That's sad! You don't have any requests!",
-                              style: TextStyle(fontSize: 18))),
+                              style: TextStyle(
+                                  fontSize: 18, color: Colors.black26))),
                 );
               })),
     );
