@@ -5,17 +5,11 @@ import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class ServiceCard extends StatelessWidget {
-<<<<<<< HEAD
-  final AuthController _auth = locator<AuthController>();
   final String uid, urlImage;
   ChatUser? user;
-  ServiceCard({Key? key, required this.uid, required this.urlImage})
-=======
-  final String uid, urlImage;
-  ChatUser user;
+  final AuthController _auth = locator<AuthController>();
   ServiceCard(
-      {Key? key, required this.user, required this.uid, required this.urlImage})
->>>>>>> seanpen
+      {Key? key, required this.uid, required this.urlImage})
       : super(key: key);
 
   void initState() {
@@ -35,22 +29,12 @@ class ServiceCard extends StatelessWidget {
           return allowed.contains(directions);
         },
         onSwipeCompleted: (index, direction) {
-<<<<<<< HEAD
-          // if (direction == SwipeDirection.right) {
-          //   print('Rejected');
-          // } else {
-          //   print(uid + 'added');
-
-          //   user!.sendRequest(uid, user!.uid);
-          // }
-=======
           if (direction == SwipeDirection.right) {
             print(uid + 'added');
-            user.updateRequest(uid);
+            user!.sendRequest(uid, user!.uid);
           } else {
             print('Rejected');
           }
->>>>>>> seanpen
           print('$index, $direction');
         },
         horizontalSwipeThreshold: 0.8,

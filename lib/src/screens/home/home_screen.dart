@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final cardController = SwipableStackController();
   final UserController _userController = UserController();
 
-  ChatUser? user ;
+  ChatUser? user;
   ServiceCard? card;
   List<String> users = [];
 
@@ -54,29 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: AnimatedBuilder(
             animation: _userController,
             builder: (context, Widget? w) {
-<<<<<<< HEAD
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  alignment: AlignmentDirectional.topStart,
-                  fit: StackFit.loose,
-                  children: [
-                    for (ChatUser userData in _userController.users)
-                      if (user != null && userData.uid != FirebaseAuth.instance.currentUser!.uid && userData.image != '')
-                        ServiceCard(
-                          uid: userData.uid,
-                          urlImage: userData.image,
-                        ),
-
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: FloatingActionButton(
-                        tooltip: 'Reset',
-                        onPressed: () {
-                          cardController.canRewind;
-                        },
-                        child: const Icon(Icons.reset_tv),
-=======
               return Stack(
                 alignment: AlignmentDirectional.topStart,
                 fit: StackFit.loose,
@@ -85,14 +62,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
                         user.image != '')
                       ServiceCard(
-                        user: user,
                         uid: user.uid,
                         urlImage: user.image,
->>>>>>> seanpen
                       ),
-                    ),
-                  ],
-                ),
+                ],
               );
             }),
       ),

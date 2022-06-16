@@ -41,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       resizeToAvoidBottomInset: true,
       body: Container(
         decoration: const BoxDecoration(
@@ -70,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                  padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: SizedBox(
                     width: 300,
                     height: 50,
