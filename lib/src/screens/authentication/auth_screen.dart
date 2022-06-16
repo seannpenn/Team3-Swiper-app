@@ -255,7 +255,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                               20.0,
                                                               20.0,
                                                               20.0),
-                                                      hintText: "password",
+                                                      hintText: "Password",
                                                       prefixIcon: Padding(
                                                         padding:
                                                             const EdgeInsets
