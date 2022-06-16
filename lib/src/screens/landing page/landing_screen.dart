@@ -8,6 +8,7 @@ import 'package:swiper_app/src/screens/chat/chat_home_screen.dart';
 
 import 'package:swiper_app/src/screens/home/home_screen.dart';
 import 'package:swiper_app/src/screens/landing%20page/friend_request_page.dart';
+import 'package:swiper_app/src/screens/landing%20page/friends_page.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
 import 'package:swiper_app/src/services/image_service.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
@@ -124,6 +125,11 @@ class _LandingScreenState extends State<LandingScreen> {
                     // subtitle: const Text("This is the 1st item"),
                     trailing: const Icon(Icons.more_vert),
                     onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FriendScreen()),
+                      );
                       print('Friends tapped');
                     },
                   ),
