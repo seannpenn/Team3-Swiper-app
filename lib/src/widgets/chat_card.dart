@@ -2,19 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
-
 import '../models/chat_message_model.dart';
 
 class ChatCard extends StatelessWidget {
   final Function()? onLongPress;
   final Function()? onTap;
+  final ChatMessage chat;
+  final String? currentUserId = FirebaseAuth.instance.currentUser?.uid;
 
   ChatCard({Key? key, required this.chat, this.onLongPress, this.onTap})
       : super(key: key);
 
   // final ChatController _chatController = ChatController();
-  final ChatMessage chat;
-  final String? currentUserId = FirebaseAuth.instance.currentUser?.uid;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -96,18 +96,32 @@ class ChatCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Align(alignment:Alignment.topLeft, child: Text(chat.message, style: TextStyle(color: chat.sentBy == currentUserId? Colors.white: Colors.black, letterSpacing: 0.5),)),
-                        
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              chat.message,
+                              style: TextStyle(
+                                  color: chat.sentBy == currentUserId
+                                      ? Colors.white
+                                      : Colors.black,
+                                  letterSpacing: 0.5),
+                            )),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            if(chat.message != 'Message Deleted.')
-                            chat.sentBy == currentUserId
-                                ? Text(
-                                    chat.edited ? 'edited' : '',
-                                    style: TextStyle(fontSize: 12, color: chat.sentBy == currentUserId? Colors.white: Colors.black, letterSpacing: 0.5),
-                                  )
-                                : const Text(''),
+                            if (chat.message != 'Message Deleted.')
+                              chat.sentBy == currentUserId
+                                  ? Text(
+                                      chat.edited ? 'edited' : '',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: chat.sentBy == currentUserId
+                                              ? Colors.white
+                                              : Colors.black,
+                                          letterSpacing: 0.5),
+                                    )
+                                  : const Text(''),
                           ],
                         ),
                         const SizedBox(

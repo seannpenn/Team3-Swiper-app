@@ -112,6 +112,15 @@ class ChatUser {
         .map(ChatUser.fromDocumentSnap);
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> fromUidStreamChats(
+      {required String uid}) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('chats')
+        .snapshots();
+  }
+
   static List<ChatUser> fromQuerySnap(QuerySnapshot snap) {
     try {
       return snap.docs.map(ChatUser.fromDocumentSnap).toList();
