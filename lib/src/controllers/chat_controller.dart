@@ -41,11 +41,22 @@ class ChatController with ChangeNotifier {
       {required String message,
       required String toUser,
       required String currentUser}) {
-    return FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser)
         .collection('chats')
         .doc(toUser)
+        .collection('messages')
+        .add(ChatMessage(
+          sentBy: FirebaseAuth.instance.currentUser!.uid,
+          message: message,
+        ).json);
+
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(toUser)
+        .collection('chats')
+        .doc(currentUser)
         .collection('messages')
         .add(ChatMessage(
           sentBy: FirebaseAuth.instance.currentUser!.uid,

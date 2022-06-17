@@ -109,7 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextFormField(
                       onFieldSubmitted: (String text) {
-                        // send();
+                        send();
                       },
                       focusNode: _messageFN,
                       controller: _messageController,
@@ -128,11 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         Icons.send,
                         color: Colors.teal,
                       ),
-                      onPressed: () {
-                        user?.sendMessageTest(
-                            message: 'helloooo',
-                            receiptUser: 'A61llLnbcsZoxeIwDYPqByS1bYo2');
-                      })
+                      onPressed: send())
                 ],
               ),
             )
@@ -142,13 +138,16 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // send() {
-  //   _messageFN.unfocus();
-  //   if (_messageController.text.isNotEmpty) {
-  //     _chatController.sendMessage(message: _messageController.text.trim());
-  //     _messageController.text = '';
-  //   }
-  // }
+  send() {
+    _messageFN.unfocus();
+    if (_messageController.text.isNotEmpty) {
+      _chatController.sendMessagePrivate(
+          message: _messageController.text.trim(),
+          toUser: widget.toUser!,
+          currentUser: _auth.currentUser!.uid);
+      _messageController.text = '';
+    }
+  }
 
   showEditDialog(BuildContext context, ChatMessage chatMessage) async {
     showDialog<ChatMessage>(
