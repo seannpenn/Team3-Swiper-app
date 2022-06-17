@@ -48,7 +48,7 @@ class ChatUser {
         'username': username,
         'email': email,
         'image': image,
-        'bio' : bio,
+        'bio': bio,
         'friends': friends,
         'request': request,
         'created': created,
@@ -89,8 +89,6 @@ class ChatUser {
     });
   }
 
-<<<<<<< HEAD
-=======
   Future addBio(String userBio) {
     return FirebaseFirestore.instance
         .collection('users')
@@ -98,7 +96,6 @@ class ChatUser {
         .update({"bio": userBio});
   }
 
->>>>>>> seanpen
   static Stream<ChatUser> fromUidStream({required String uid}) {
     return FirebaseFirestore.instance
         .collection('users')
