@@ -127,10 +127,18 @@ class ChatCard extends StatelessWidget {
                                           fontSize: 12,
                                           color: chat.sentBy == currentUserId
                                               ? Colors.white
-                                              : Colors.black,
+                                              : Color.fromARGB(255, 20, 69, 78),
                                           letterSpacing: 0.5),
                                     )
-                                  : const Text(''),
+                                  : Text(
+                                      chat.edited ? 'edited' : '',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: chat.sentBy == currentUserId
+                                              ? Colors.white
+                                              : Color.fromARGB(255, 20, 69, 78),
+                                          letterSpacing: 0.5),
+                                    ),
                           ],
                         ),
                         const SizedBox(
