@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:swiper_app/src/models/chat_message_model.dart';
 
 class ChatUser {
   final String uid, username, email, image, bio;
@@ -96,6 +98,20 @@ class ChatUser {
         .update({"bio": userBio});
   }
 
+  Future sendMessageTest(
+      {required String message, required String receiptUser}) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('chats')
+        .doc(receiptUser)
+        .collection('messages')
+        .add(ChatMessage(
+          sentBy: FirebaseAuth.instance.currentUser!.uid,
+          message: message,
+        ).json);
+  }
+
   static Stream<ChatUser> fromUidStream({required String uid}) {
     return FirebaseFirestore.instance
         .collection('users')
@@ -116,6 +132,15 @@ class ChatUser {
   static Stream<List<ChatUser>> appUsers() {
     return FirebaseFirestore.instance
         .collection('users')
+        .snapshots()
+        .map(ChatUser.fromQuerySnap);
+  }
+
+  static Stream<List<ChatUser>> currentThreads() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('chats')
         .snapshots()
         .map(ChatUser.fromQuerySnap);
   }

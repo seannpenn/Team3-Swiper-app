@@ -62,40 +62,48 @@ class _LandingScreenState extends State<LandingScreen> {
         ],
       ),
       endDrawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: Row(
-                children: [
-                  InkWell(
-                    // onTap: () {
-                    //   ImageService.updateProfileImage();
-                    // },
-                    child: AvatarImage(
-                        uid: FirebaseAuth.instance.currentUser!.uid),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  UserNameFromDB(uid: FirebaseAuth.instance.currentUser!.uid)
-                ],
-              ),
+        child: Container(
+          decoration: const BoxDecoration(
+            // borderRadius: BorderRadius.only(
+            //     topLeft: Radius.circular(35), topRight: Radius.circular(35)),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 56, 208, 193),
+                Color.fromARGB(194, 1, 61, 85)
+              ],
             ),
-            Expanded(
-              child: Container(
+          ),
+          child: Column(
+            children: [
+              Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35),
-                      topRight: Radius.circular(35)),
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Color.fromARGB(255, 56, 208, 193),
-                      Color.fromARGB(194, 1, 61, 85)
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35)),
+                  color: Colors.white,
+                ),
+                child: DrawerHeader(
+                  child: Row(
+                    children: [
+                      InkWell(
+                        // onTap: () {
+                        //   ImageService.updateProfileImage();
+                        // },
+                        child: AvatarImage(
+                            uid: FirebaseAuth.instance.currentUser!.uid),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      UserNameFromDB(
+                          uid: FirebaseAuth.instance.currentUser!.uid)
                     ],
                   ),
                 ),
+              ),
+              Expanded(
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: <Widget>[
@@ -163,19 +171,23 @@ class _LandingScreenState extends State<LandingScreen> {
                   ],
                 ),
               ),
-            ),
-            Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(40)),
-              child: ListTile(
-                leading: const Icon(Icons.logout_sharp),
-                title: const Text('Log out'),
-                onTap: () async {
-                  _auth.logout();
-                },
-              ),
-            )
-          ],
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35)),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+                child: ListTile(
+                  leading: const Icon(Icons.logout_sharp),
+                  title: const Text('Log out'),
+                  onTap: () async {
+                    _auth.logout();
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: _children[_selectedIndex],
@@ -195,7 +207,7 @@ class _LandingScreenState extends State<LandingScreen> {
           unselectedIconTheme: const IconThemeData(
             color: Colors.grey,
           ),
-          unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
+          unselectedItemColor: Colors.grey,
 
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
