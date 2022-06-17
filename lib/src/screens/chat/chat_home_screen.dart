@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/screens/chat/chat_screen.dart';
 
 import 'package:swiper_app/src/widgets/chat_card.dart';
+import 'package:swiper_app/src/widgets/thread_card.dart';
 
 import '../../../service_locators.dart';
 
@@ -18,7 +20,7 @@ class ChatHomeScreen extends StatefulWidget {
 
 class _ChatHomeScreenState extends State<ChatHomeScreen> {
   final ChatController _chatController = ChatController();
-
+  final UserController _userController = UserController();
   final ScrollController _scrollController = ScrollController();
   ChatCard? card;
   // int _selectedIndex = 0;
@@ -55,107 +57,25 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
-      body: SizedBox(
+      body: Container(
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Stack(children: [
-          SingleChildScrollView(
-            // padding: const EdgeInsets.all(8),
-            controller: _scrollController,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  // height: sizeV * 10,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(5, 0, 0, 0),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: Row(
-                    children: const [
-                      Text(
-                        'Chats',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                        ),
-                      ),
+        child: Column(
+          children: [
+            AnimatedBuilder(
+                animation: _chatController,
+                builder: (context, Widget? w) {
+                  return Column(
+                    children: [
+                      for (ChatUser threads in _userController.threads)
+                        ThreadCard(user: threads,)
                     ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: InkWell(
-                    splashColor: Colors.teal,
-                    onTap: () {
-                      locator<NavigationService>()
-                          .replaceLastRouteStackRecord(ChatScreen.route);
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ChatScreen()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          )
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 5,
-                              right: 20,
-                            ),
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.amber),
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text('Global Chat'),
-                              ),
-                              Container(
-                                width: 60,
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: const Text(
-                                  'hello',
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Divider(color: Color.fromARGB(48, 0, 150, 135), thickness: 2),
-              ],
-            ),
-          )
-        ]),
+                  );
+                }),
+          ],
+        ),
       ),
     );
   }

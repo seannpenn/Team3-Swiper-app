@@ -43,62 +43,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      resizeToAvoidBottomInset: true,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 56, 208, 193),
-              Color.fromARGB(194, 1, 61, 85)
-            ],
-          ),
-        ),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    children: [
-                      const Positioned(
-                        left: 125,
-                        top: 140,
-                        child: Icon(
-                          Icons.add_a_photo,
-                          color: Colors.white,
-                          // size: radius * .95,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          ImageService.updateProfileImage();
-                        },
-                        child: AvatarImage(
-                          uid: FirebaseAuth.instance.currentUser!.uid,
-                          radius: 80,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: SizedBox(
-                    width: 300,
-                    height: 50,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Add bio',
-                      ),
-=======
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Container(
@@ -142,7 +86,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ],
->>>>>>> seanpen
                     ),
                   ),
                   Container(
