@@ -116,6 +116,12 @@ class ChatUser {
   }
 
   Future createThread({required String toUser, required String currentUser}) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(toUser)
+        .collection('chats')
+        .doc(currentUser)
+        .set({'id': currentUser});
     return FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser)
