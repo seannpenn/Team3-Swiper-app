@@ -75,7 +75,14 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
                     ),
                   ),
                   child: Row(
-                    children: const [Text('Circle goes here')],
+                    children: const [
+                      Text(
+                        'Chats',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(

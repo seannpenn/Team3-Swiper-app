@@ -93,17 +93,19 @@ class _AuthScreenState extends State<AuthScreen> {
                     top: (size.height / 100) * 10,
                     left: 1,
                     right: 1,
-                    child: Center(
+                    child: const Center(
                         child: Text('SwipeR',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 36))),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 36,
+                                fontFamily: 'Sniglet'))),
                   ),
                   Positioned(
                     bottom: 1,
                     child: Container(
                       height: (size.height / 100) * 70,
                       width: size.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(50),

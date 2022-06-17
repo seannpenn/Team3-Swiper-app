@@ -19,6 +19,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthController _auth = locator<AuthController>();
 
+  final TextEditingController _bioController = TextEditingController();
+  final FocusNode _bioFN = FocusNode();
   ChatUser? user;
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       resizeToAvoidBottomInset: true,
       body: Container(
         decoration: const BoxDecoration(
@@ -95,89 +98,177 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         border: OutlineInputBorder(),
                         hintText: 'Add bio',
                       ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 500,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40.0),
-                      color: Color.fromARGB(255, 158, 188, 188),
-                    ),
-                    child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Name',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 500,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40.0),
-                      color: Color.fromARGB(255, 158, 188, 188),
-                    ),
-                    child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            '@${user?.username}',
-                            style: const TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 500,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40.0),
-                      color: Color.fromARGB(255, 158, 188, 188),
-                    ),
-                    child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            '${user?.email}',
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Color.fromARGB(255, 0, 0, 0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
-                  ),
-                  child: const Text('Sign Out'),
-                ),
+=======
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(255, 56, 208, 193),
+                Color.fromARGB(194, 1, 61, 85)
               ],
+            ),
+          ),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        const Positioned(
+                          left: 125,
+                          top: 140,
+                          child: Icon(
+                            Icons.add_a_photo,
+                            color: Colors.white,
+                            // size: radius * .95,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            ImageService.updateProfileImage();
+                          },
+                          child: AvatarImage(
+                            uid: FirebaseAuth.instance.currentUser!.uid,
+                            radius: 80,
+                          ),
+                        ),
+                      ],
+>>>>>>> seanpen
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: Row(children: [
+                      Expanded(
+                          child: TextFormField(
+                        focusNode: _bioFN,
+                        controller: _bioController,
+                        decoration: InputDecoration(
+                          hintText: user?.bio,
+                          suffixIcon: IconButton(
+                            icon: const Icon(
+                              Icons.done,
+                              color: Color.fromARGB(255, 241, 241, 241),
+                            ),
+                            onPressed: () {
+                              user!.addBio(_bioController.text);
+                            },
+                          ),
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
+                        ),
+                      )),
+                    ]),
+                  ),
+
+                  //testingDisplay
+                  // Text(
+                  //   '${_bioController.text}',
+                  //   style: const TextStyle(
+                  //     fontSize: 15,
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 500,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40.0),
+                        color: Color.fromARGB(255, 158, 188, 188),
+                      ),
+                      child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              'Name',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            ),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 500,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40.0),
+                        color: Color.fromARGB(255, 158, 188, 188),
+                      ),
+                      child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              '@${user?.username}',
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 500,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40.0),
+                        color: Color.fromARGB(255, 158, 188, 188),
+                      ),
+                      child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              '${user?.email}',
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            ),
+                          )),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shadowColor: Color.fromARGB(255, 0, 0, 0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
+                    ),
+                    child: const Text('Sign Out'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
+  // addBio() {
+  //   _bioFN.unfocus();
+  //   if (_bioController.text.isNotEmpty) {
+  //     _bioController.text = '';
+  //   }
+  // }
 }
