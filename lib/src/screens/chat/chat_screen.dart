@@ -121,7 +121,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               color: Colors.teal,
                             ),
                             onPressed: () {
-                              // send();
+                              send();
                             }),
                         fillColor: Colors.white,
                         hintText: 'Add a message...',
