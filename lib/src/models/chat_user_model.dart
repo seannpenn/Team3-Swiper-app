@@ -65,6 +65,9 @@ class ChatUser {
 
   Future acceptRequest(String userUid, String currentUser) {
     declineRequest(userUid, currentUser);
+    FirebaseFirestore.instance.collection('users').doc(userUid).update({
+      "friends": FieldValue.arrayUnion([currentUser])
+    });
     return FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser)
