@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
 
-import '../models/chat_message_model.dart';
 
 class ThreadCard extends StatelessWidget {
   final Function()? onLongPress;

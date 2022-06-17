@@ -10,7 +10,6 @@ import 'package:swiper_app/src/screens/home/home_screen.dart';
 import 'package:swiper_app/src/screens/landing%20page/friend_request_page.dart';
 import 'package:swiper_app/src/screens/landing%20page/friends_page.dart';
 import 'package:swiper_app/src/screens/profile/profile_screen.dart';
-import 'package:swiper_app/src/services/image_service.dart';
 import 'package:swiper_app/src/widgets/avatars.dart';
 
 class LandingScreen extends StatefulWidget {

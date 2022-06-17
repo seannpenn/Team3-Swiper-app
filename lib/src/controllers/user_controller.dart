@@ -14,7 +14,7 @@ class UserController with ChangeNotifier {
 
   UserController() {
     _userSub = ChatUser.appUsers().listen(userCountHandler);
-    _threadSub = ChatUser.currentThreads().listen(userCountHandler);
+    _threadSub = ChatUser.currentThreads().listen(threadHandler);
   }
 
   @override
@@ -24,9 +24,13 @@ class UserController with ChangeNotifier {
     super.dispose();
   }
 
+  threadHandler(List<ChatUser> update) {
+    threads = update;
+    notifyListeners();
+  }
+
   userCountHandler(List<ChatUser> update) {
     users = update;
-    threads = update;
     notifyListeners();
   }
   
