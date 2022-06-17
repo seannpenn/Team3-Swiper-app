@@ -12,16 +12,16 @@ import '../../models/chat_message_model.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String route = 'chat-screen';
-
-  const ChatScreen({Key? key, String? toUser}) : super(key: key);
+  final String? toUser;
+  const ChatScreen({Key? key, this.toUser}) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final ChatController _chatController = ChatController();
-final AuthController _auth = locator<AuthController>();
+  late final ChatController _chatController;
+  final AuthController _auth = locator<AuthController>();
   final TextEditingController _messageController = TextEditingController();
   final FocusNode _messageFN = FocusNode();
   final ScrollController _scrollController = ScrollController();
@@ -31,6 +31,7 @@ final AuthController _auth = locator<AuthController>();
   ChatUser? user;
   @override
   void initState() {
+    _chatController = ChatController(widget.toUser!);
     ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
       if (mounted) {
         setState(() {
@@ -123,15 +124,15 @@ final AuthController _auth = locator<AuthController>();
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
-                      Icons.send,
-                      color: Colors.teal,
-                    ),
-                    onPressed: (){
-                      user?.sendMessageTest(message: 'helloooo', receiptUser: 'A61llLnbcsZoxeIwDYPqByS1bYo2');
-                    }
-                    
-                  )
+                      icon: const Icon(
+                        Icons.send,
+                        color: Colors.teal,
+                      ),
+                      onPressed: () {
+                        user?.sendMessageTest(
+                            message: 'helloooo',
+                            receiptUser: 'A61llLnbcsZoxeIwDYPqByS1bYo2');
+                      })
                 ],
               ),
             )

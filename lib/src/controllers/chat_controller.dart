@@ -10,14 +10,13 @@ class ChatController with ChangeNotifier {
 
   late StreamSubscription _chatSub;
 
+  late String currentUser;
   List<ChatMessage> chats = [];
 
-  ChatController({String? toUser, String? currentUser}) {
-    if (toUser != null && currentUser != null) {
-      _chatSub =
-          ChatMessage.userChats(toUser, currentUser).listen(chatUpdateHandler);
-    }
-    _chatSub = ChatMessage.currentChats().listen(chatUpdateHandler);
+  ChatController(String toUser) {
+    _chatSub =
+        ChatMessage.userChats(toUser, FirebaseAuth.instance.currentUser!.uid)
+            .listen(chatUpdateHandler);
   }
 
   @override
