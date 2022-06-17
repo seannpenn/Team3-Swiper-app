@@ -4,6 +4,7 @@ import 'package:swiper_app/service_locators.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
+import 'package:swiper_app/src/widgets/avatars.dart';
 
 import 'package:swiper_app/src/widgets/chat_card.dart';
 import 'package:swiper_app/src/widgets/input_widget.dart';
@@ -64,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[400],
-        title: const Text('Chat app'),
+        title: UserNameFromDB(uid: widget.toUser!),
       ),
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
@@ -109,7 +110,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextFormField(
                       onFieldSubmitted: (String text) {
-                        // send();
+                        send();
                       },
                       focusNode: _messageFN,
                       controller: _messageController,
@@ -129,9 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         color: Colors.teal,
                       ),
                       onPressed: () {
-                        user?.sendMessageTest(
-                            message: 'helloooo',
-                            receiptUser: 'A61llLnbcsZoxeIwDYPqByS1bYo2');
+                        send();
                       })
                 ],
               ),
@@ -142,13 +141,16 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // send() {
-  //   _messageFN.unfocus();
-  //   if (_messageController.text.isNotEmpty) {
-  //     _chatController.sendMessage(message: _messageController.text.trim());
-  //     _messageController.text = '';
-  //   }
-  // }
+  send() {
+    _messageFN.unfocus();
+    if (_messageController.text.isNotEmpty) {
+      _chatController.sendMessagePrivate(
+          message: _messageController.text.trim(),
+          toUser: widget.toUser!,
+          currentUser: _auth.currentUser!.uid);
+      _messageController.text = '';
+    }
+  }
 
   showEditDialog(BuildContext context, ChatMessage chatMessage) async {
     showDialog<ChatMessage>(

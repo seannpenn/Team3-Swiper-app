@@ -105,9 +105,14 @@ class _FriendScreenState extends State<FriendScreen> {
                                 switch (direction) {
                                   case DismissDirection.endToStart:
                                     if (mounted) {
+                                      print('oten' +
+                                          snapshot.data!.friends[index]);
+                                      print(snapshot.data!.uid);
                                       setState(() {
-                                        //filled.value
-                                        
+                                        snapshot.data!.createThread(
+                                            toUser:
+                                                snapshot.data!.friends[index],
+                                            currentUser: snapshot.data!.uid);
                                       });
                                     }
                                     break;
