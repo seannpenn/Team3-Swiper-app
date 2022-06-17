@@ -4,6 +4,7 @@ import 'package:swiper_app/service_locators.dart';
 import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
+import 'package:swiper_app/src/widgets/avatars.dart';
 
 import 'package:swiper_app/src/widgets/chat_card.dart';
 import 'package:swiper_app/src/widgets/input_widget.dart';
@@ -64,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal[400],
-        title: const Text('Chat app'),
+        title: UserNameFromDB(uid: widget.toUser!),
       ),
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
@@ -128,7 +129,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         Icons.send,
                         color: Colors.teal,
                       ),
-                      onPressed: send())
+                      onPressed: () {
+                        send();
+                      })
                 ],
               ),
             )
