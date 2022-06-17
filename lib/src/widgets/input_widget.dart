@@ -1,12 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:swiper_app/service_locators.dart';
+import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/models/chat_message_model.dart';
 
 class InputWidget extends StatefulWidget {
   final String? current;
   final ChatMessage chat;
-
-  const InputWidget({this.current, required this.chat, Key? key})
+  final String toUser;
+  const InputWidget(
+      {this.current, required this.toUser, required this.chat, Key? key})
       : super(key: key);
 
   @override
@@ -15,6 +17,7 @@ class InputWidget extends StatefulWidget {
 
 class _InputWidgetState extends State<InputWidget> {
   final TextEditingController _tCon = TextEditingController();
+  final AuthController _auth = locator<AuthController>();
   String? get current => widget.current;
   ChatMessage get chat => widget.chat;
 
@@ -40,7 +43,9 @@ class _InputWidgetState extends State<InputWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text('Edit Message'),
-            const SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             TextFormField(
               controller: _tCon,
               validator: (value) {
@@ -62,7 +67,8 @@ class _InputWidgetState extends State<InputWidget> {
               onPressed: (_formKey.currentState?.validate() ?? false)
                   ? () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        chat.updateDetails(_tCon.text);
+                        chat.updateDetails(
+                            _tCon.text, widget.toUser, _auth.currentUser!.uid);
                         Navigator.of(context).pop();
                       }
                     }
