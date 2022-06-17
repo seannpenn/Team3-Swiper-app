@@ -75,9 +75,9 @@ class ChatMessage {
     print(currentUser);
     FirebaseFirestore.instance
         .collection('users')
-        .doc(currentUser)
-        .collection('chats')
         .doc(toUser)
+        .collection('chats')
+        .doc(currentUser)
         .collection('messages')
         .doc(uid)
         .update({'message': update, 'edited': true});

@@ -86,6 +86,9 @@ class ChatUser {
   }
 
   Future deleteFriend(String userUid, String currentUser) {
+    FirebaseFirestore.instance.collection('users').doc(userUid).update({
+      "friends": FieldValue.arrayRemove([currentUser])
+    });
     return FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser)
