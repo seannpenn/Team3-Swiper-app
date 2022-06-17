@@ -49,5 +49,9 @@ flutter:
     - family: Sniglet
       fonts:
         - asset: fonts/Sniglet-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: fonts/Merriweather-Regular.ttf
+        
 
         

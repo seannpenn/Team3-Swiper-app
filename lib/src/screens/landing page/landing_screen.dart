@@ -48,7 +48,7 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SwipR'),
+        title: const Text('SwipeR', style: TextStyle(fontFamily: 'Sniglet')),
         backgroundColor: Colors.teal[400],
         actions: [
           Builder(builder: (context) {
