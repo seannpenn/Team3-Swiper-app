@@ -59,6 +59,16 @@ class ChatMessage {
       .snapshots()
       .map(ChatMessage.fromQuerySnap);
 
+  static Stream<List<ChatMessage>> userChats(String uid, String currentUser) =>
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser)
+          .collection('chats')
+          .doc(uid)
+          .collection('messages')
+          .orderBy('ts')
+          .snapshots()
+          .map(ChatMessage.fromQuerySnap);
 
   updateDetails(String update) {
     FirebaseFirestore.instance

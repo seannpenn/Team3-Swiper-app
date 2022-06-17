@@ -19,7 +19,6 @@ class ChatHomeScreen extends StatefulWidget {
 }
 
 class _ChatHomeScreenState extends State<ChatHomeScreen> {
-  final ChatController _chatController = ChatController();
   final UserController _userController = UserController();
   final ScrollController _scrollController = ScrollController();
   ChatCard? card;
@@ -35,21 +34,8 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
     //     });
     //   }
     // });
-    _chatController.addListener(scrollToBottom);
+
     super.initState();
-  }
-
-  scrollToBottom() async {
-    await Future.delayed(const Duration(milliseconds: 250));
-    // print('scrolling to bottom');
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-        curve: Curves.easeIn, duration: const Duration(milliseconds: 250));
-  }
-
-  @override
-  void dispose() {
-    _chatController.dispose();
-    super.dispose();
   }
 
   @override
@@ -58,19 +44,20 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
       body: Container(
-        padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+        padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
             AnimatedBuilder(
-                animation: _chatController,
+                animation: _userController,
                 builder: (context, Widget? w) {
                   return Column(
                     children: [
                       for (ChatUser threads in _userController.threads)
-                        ThreadCard(user: threads,)
+                        ThreadCard(
+                          user: threads,
+                        )
                     ],
                   );
                 }),

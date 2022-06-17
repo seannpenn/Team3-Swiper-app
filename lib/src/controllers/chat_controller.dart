@@ -6,13 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:swiper_app/src/models/chat_message_model.dart';
 
 class ChatController with ChangeNotifier {
-  ChatMessage ?chatMessage;
-  
+  ChatMessage? chatMessage;
+
   late StreamSubscription _chatSub;
+
+  late String currentUser;
   List<ChatMessage> chats = [];
 
-  ChatController() {
-    _chatSub = ChatMessage.currentChats().listen(chatUpdateHandler);
+  ChatController(String toUser) {
+    _chatSub =
+        ChatMessage.userChats(toUser, FirebaseAuth.instance.currentUser!.uid)
+            .listen(chatUpdateHandler);
   }
 
   @override
@@ -25,11 +29,27 @@ class ChatController with ChangeNotifier {
     chats = update;
     notifyListeners();
   }
-  
 
-  Future sendMessage({required String message}) {
+  Future sendMessageGlobal({required String message}) {
     return FirebaseFirestore.instance.collection('chats').add(ChatMessage(
-            sentBy: FirebaseAuth.instance.currentUser!.uid, message: message,)
-        .json);
+          sentBy: FirebaseAuth.instance.currentUser!.uid,
+          message: message,
+        ).json);
+  }
+
+  Future sendMessagePrivate(
+      {required String message,
+      required String toUser,
+      required String currentUser}) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .collection('chats')
+        .doc(toUser)
+        .collection('messages')
+        .add(ChatMessage(
+          sentBy: FirebaseAuth.instance.currentUser!.uid,
+          message: message,
+        ).json);
   }
 }
