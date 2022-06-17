@@ -3,18 +3,19 @@ import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class ServiceCard extends StatelessWidget {
-  final String uid, urlImage, bio;
+  final String urlImage, bio;
   ChatUser? user;
+  ChatUser? toUser;
   ServiceCard(
       {Key? key,
-      required this.uid,
+      required this.toUser,
       required this.urlImage,
       this.bio = '',
       this.user})
       : super(key: key);
 
   void initState() {
-    ChatUser.fromUid(uid: uid).then(((value) => {user = value}));
+    ChatUser.fromUid(uid: toUser!.uid).then(((value) => {user = value}));
   }
 
   @override
@@ -31,8 +32,8 @@ class ServiceCard extends StatelessWidget {
         onSwipeCompleted: (index, direction) {
           if (direction == SwipeDirection.right) {
             print(user!.uid);
-            print(uid + 'added');
-            user!.sendRequest(uid, user!.uid);
+            print(toUser!.uid + 'added');
+            user!.sendRequest(toUser!.uid, user!.uid);
           } else {
             print('Rejected');
           }
@@ -64,7 +65,7 @@ class ServiceCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(
-                          '@${user?.username}',
+                          '@${toUser?.username}',
                           style: const TextStyle(
                             fontSize: 30,
                             color: Color.fromARGB(255, 249, 249, 249),

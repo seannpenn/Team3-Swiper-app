@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         !user.request.contains(currentUser!.uid))
                       ServiceCard(
                         user: currentUser,
-                        uid: user.uid,
+                        toUser: user,
                         urlImage: user.image,
                         bio: user.bio,
                       ),
