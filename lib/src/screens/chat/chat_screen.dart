@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swiper_app/service_locators.dart';
+import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/controllers/chat_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
@@ -19,6 +21,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final ChatController _chatController = ChatController();
+final AuthController _auth = locator<AuthController>();
   final TextEditingController _messageController = TextEditingController();
   final FocusNode _messageFN = FocusNode();
   final ScrollController _scrollController = ScrollController();
@@ -28,13 +31,13 @@ class _ChatScreenState extends State<ChatScreen> {
   ChatUser? user;
   @override
   void initState() {
-    // ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
-    //   if (mounted) {
-    //     setState(() {
-    //       user = value;
-    //     });
-    //   }
-    // });
+    ChatUser.fromUid(uid: _auth.currentUser!.uid).then((value) {
+      if (mounted) {
+        setState(() {
+          user = value;
+        });
+      }
+    });
     _chatController.addListener(scrollToBottom);
     super.initState();
   }
@@ -105,7 +108,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextFormField(
                       onFieldSubmitted: (String text) {
-                        send();
+                        // send();
                       },
                       focusNode: _messageFN,
                       controller: _messageController,
@@ -124,7 +127,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       Icons.send,
                       color: Colors.teal,
                     ),
-                    onPressed: send,
+                    onPressed: (){
+                      user?.sendMessageTest(message: 'helloooo', receiptUser: 'A61llLnbcsZoxeIwDYPqByS1bYo2');
+                    }
+                    
                   )
                 ],
               ),
@@ -135,14 +141,13 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  send() {
-    _messageFN.unfocus();
-    if (_messageController.text.isNotEmpty) {
-      _chatController.sendMessageGlobal(
-          message: _messageController.text.trim());
-      _messageController.text = '';
-    }
-  }
+  // send() {
+  //   _messageFN.unfocus();
+  //   if (_messageController.text.isNotEmpty) {
+  //     _chatController.sendMessage(message: _messageController.text.trim());
+  //     _messageController.text = '';
+  //   }
+  // }
 
   showEditDialog(BuildContext context, ChatMessage chatMessage) async {
     showDialog<ChatMessage>(
