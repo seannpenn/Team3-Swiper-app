@@ -6,15 +6,19 @@ import 'package:swiper_app/src/controllers/auth_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class ServiceCard extends StatelessWidget {
-  final String uid, urlImage;
+  final String uid, urlImage, bio;
   ChatUser? user;
   final AuthController _auth = locator<AuthController>();
-  ServiceCard({Key? key, required this.uid, required this.urlImage, this.user})
+  ServiceCard(
+      {Key? key,
+      required this.uid,
+      required this.urlImage,
+      this.user,
+      this.bio = ''})
       : super(key: key);
 
   void initState() {
-    ChatUser.fromUid(uid: _auth.currentUser!.uid)
-        .then(((value) => {user = value}));
+    ChatUser.fromUid(uid: uid).then(((value) => {user = value}));
   }
 
   @override
@@ -54,19 +58,33 @@ class ServiceCard extends StatelessWidget {
                     alignment: const Alignment(-0.3, 0),
                   ),
                 ),
-                child: Center(
-                    child: Column(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '{Hi Im Sean, I can work out with you :D}',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.orange,
-                          backgroundColor: Colors.black),
+                    Container(
+                      margin: EdgeInsets.only(top: 200, left: 20),
+                      child: const Text(
+                        'Gilben Ferolino',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 249, 249, 249),
+                            backgroundColor: Colors.black),
+                      ),
                     ),
-                    Text(uid)
+                    Container(
+                      margin: EdgeInsets.only(top: 200, left: 20),
+                      child: Text(
+                        bio,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 249, 249, 249),
+                            backgroundColor: Colors.black),
+                      ),
+                    ),
+                    // Text(uid)
                   ],
-                )),
+                ),
               ),
             ),
           );

@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color.fromARGB(255, 178, 232, 239),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: AnimatedBuilder(
@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         user: currentUser,
                         uid: user.uid,
                         urlImage: user.image,
+                        bio: user.bio,
                       ),
                 ],
               );

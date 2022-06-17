@@ -38,3 +38,16 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+  fonts:
+    - family: Heebo
+      fonts:
+        - asset: fonts/Heebo-SemiBold.ttf
+    - family: VarelaRound
+      fonts:
+        - asset: fonts/VarelaRound-Regular.ttf
+    - family: Sniglet
+      fonts:
+        - asset: fonts/Sniglet-Regular.ttf
+
+        
