@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
+import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
+    getUsers();
     super.initState();
   }
 
@@ -59,18 +61,41 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.loose,
                 children: [
                   for (ChatUser user in _userController.users)
-                    if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
-                        user.image != '')
-                      ServiceCard(
-                        user: user,
-                        uid: user.uid,
-                        urlImage: user.image,
-                        bio: user.bio,
+                    for (int i = 0; i < users.length; i++)
+                      if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
+                          user.image != '' &&
+                          user.friends.contains(users[i]) &&
+                          user.request.contains(users[i]))
+                        ServiceCard(
+                          user: user,
+                          uid: user.uid,
+                          urlImage: user.image,
+                          bio: user.bio,
+                        ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: InkWell(
+                      onTap: () {
+                      },
+                      child: const Icon(
+                        Icons.replay_circle_filled,
+                        size: 40,
+                        color: Colors.teal,
                       ),
+                    ),
+                  )
                 ],
               );
             }),
       ),
     );
+  }
+
+  getUsers() {
+    userRef.get().then((QuerySnapshot snapshot) {
+      for (var doc in snapshot.docs) {
+        users.add(doc.id);
+      }
+    });
   }
 }
