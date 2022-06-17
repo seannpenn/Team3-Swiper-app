@@ -98,18 +98,10 @@ class ChatUser {
         .update({"bio": userBio});
   }
 
-  Future sendMessageTest(
-      {required String message, required String receiptUser}) {
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .collection('chats')
-        .doc(receiptUser)
-        .collection('messages')
-        .add(ChatMessage(
-          sentBy: FirebaseAuth.instance.currentUser!.uid,
-          message: message,
-        ).json);
+  Future sendMessageTest({required String message, required String receiptUser}) {
+    return FirebaseFirestore.instance.collection('users').doc(uid).collection('chats').doc(receiptUser).collection('messages').add(ChatMessage(
+            sentBy: FirebaseAuth.instance.currentUser!.uid, message: message,)
+        .json);
   }
 
   static Stream<ChatUser> fromUidStream({required String uid}) {
@@ -136,12 +128,10 @@ class ChatUser {
         .map(ChatUser.fromQuerySnap);
   }
 
-  static Stream<List<ChatUser>> currentThreads() {
+   static Stream<List<ChatUser>> currentThreads() {
     return FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('chats')
-        .snapshots()
-        .map(ChatUser.fromQuerySnap);
-  }
+      .collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('chats')
+      .snapshots()
+      .map(ChatUser.fromQuerySnap);
+   } 
 }

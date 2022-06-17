@@ -43,6 +43,7 @@ class AvatarImage extends StatelessWidget {
           } else {
             if (snap.data!.image.isEmpty) {
               return CircleAvatar(
+                
                 radius: radius,
                 backgroundColor: Colors.grey,
                 child: Icon(
