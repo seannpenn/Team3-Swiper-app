@@ -4,10 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swiper_app/src/models/chat_message_model.dart';
+import 'package:uuid/uuid.dart';
 
 class ChatController with ChangeNotifier {
   ChatMessage? chatMessage;
-
+  var uuid = Uuid();
   late StreamSubscription _chatSub;
 
   late String currentUser;
@@ -41,13 +42,16 @@ class ChatController with ChangeNotifier {
       {required String message,
       required String toUser,
       required String currentUser}) {
+    var id = uuid.v4();
+
     FirebaseFirestore.instance
         .collection('users')
         .doc(currentUser)
         .collection('chats')
         .doc(toUser)
         .collection('messages')
-        .add(ChatMessage(
+        .doc(id)
+        .set(ChatMessage(
           sentBy: FirebaseAuth.instance.currentUser!.uid,
           message: message,
         ).json);
@@ -58,7 +62,8 @@ class ChatController with ChangeNotifier {
         .collection('chats')
         .doc(currentUser)
         .collection('messages')
-        .add(ChatMessage(
+        .doc(id)
+        .set(ChatMessage(
           sentBy: FirebaseAuth.instance.currentUser!.uid,
           message: message,
         ).json);

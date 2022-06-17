@@ -22,6 +22,7 @@ dependencies:
   simple_moment: ^1.1.1
   image_picker: ^0.8.5+3
   swipable_stack: ^2.0.0
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
