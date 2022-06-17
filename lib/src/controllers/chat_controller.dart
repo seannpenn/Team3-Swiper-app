@@ -12,7 +12,11 @@ class ChatController with ChangeNotifier {
 
   List<ChatMessage> chats = [];
 
-  ChatController({String? uid, String? currentUser}) {
+  ChatController({String? toUser, String? currentUser}) {
+    if (toUser != null && currentUser != null) {
+      _chatSub =
+          ChatMessage.userChats(toUser, currentUser).listen(chatUpdateHandler);
+    }
     _chatSub = ChatMessage.currentChats().listen(chatUpdateHandler);
   }
 

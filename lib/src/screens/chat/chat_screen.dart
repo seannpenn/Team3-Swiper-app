@@ -10,7 +10,8 @@ import '../../models/chat_message_model.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String route = 'chat-screen';
-  const ChatScreen({Key? key}) : super(key: key);
+
+  const ChatScreen({Key? key, String? toUser}) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -18,7 +19,6 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final ChatController _chatController = ChatController();
-
   final TextEditingController _messageController = TextEditingController();
   final FocusNode _messageFN = FocusNode();
   final ScrollController _scrollController = ScrollController();

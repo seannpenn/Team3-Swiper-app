@@ -63,7 +63,9 @@ class ChatMessage {
       FirebaseFirestore.instance
           .collection('users')
           .doc(currentUser)
-          .collection(uid)
+          .collection('chats')
+          .doc(uid)
+          .collection('messages')
           .orderBy('ts')
           .snapshots()
           .map(ChatMessage.fromQuerySnap);
