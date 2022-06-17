@@ -4,12 +4,15 @@ import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class ServiceCard extends StatelessWidget {
   final String urlImage, bio;
+  final String? location;
   ChatUser? user;
   ChatUser? toUser;
+
   ServiceCard(
       {Key? key,
       required this.toUser,
       required this.urlImage,
+      this.location,
       this.bio = '',
       this.user})
       : super(key: key);
@@ -49,7 +52,8 @@ class ServiceCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     colorFilter: ColorFilter.mode(
-                        Color.fromARGB(255, 158, 155, 155).withOpacity(0.3),
+                        const Color.fromARGB(255, 158, 155, 155)
+                            .withOpacity(0.3),
                         BlendMode.multiply),
                     image: NetworkImage(urlImage),
                     fit: BoxFit.cover,
@@ -57,7 +61,7 @@ class ServiceCard extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  margin: EdgeInsets.only(top: 400, left: 20),
+                  margin: const EdgeInsets.only(top: 400, left: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,10 +89,11 @@ class ServiceCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(Icons.location_on, size: 15, color: Colors.red),
+                          const Icon(Icons.location_on,
+                              size: 15, color: Colors.red),
                           Text(
-                            'location here',
-                            style: TextStyle(
+                            location!,
+                            style: const TextStyle(
                               fontSize: 15,
                               color: Color.fromARGB(255, 249, 249, 249),
                               fontFamily: 'Merriweather',

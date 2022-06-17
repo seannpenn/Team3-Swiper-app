@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 
 class ChatController with ChangeNotifier {
   ChatMessage? chatMessage;
-  var uuid = Uuid();
+  var uuid = const Uuid();
   late StreamSubscription _chatSub;
 
   late String currentUser;

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
-import 'package:swiper_app/src/controllers/navigation/navigation_service.dart';
+
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
@@ -63,12 +63,32 @@ class _HomeScreenState extends State<HomeScreen> {
                         user.image != '' &&
                         !currentUser!.friends.contains(user.uid) &&
                         !user.request.contains(currentUser!.uid))
-                      ServiceCard(
-                        user: currentUser,
-                        toUser: user,
-                        urlImage: user.image,
-                        bio: user.bio,
-                      ),
+                      StreamBuilder(
+                          stream: _userController.stream,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              print(snapshot.error);
+                              return Text('Something went wrong');
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: Column(
+                                  children: const [
+                                    Text('Fetching Data'),
+                                    CircularProgressIndicator()
+                                  ],
+                                ),
+                              );
+                            }
+                            return ServiceCard(
+                              location: _userController.placemarks[0].country,
+                              user: currentUser,
+                              toUser: user,
+                              urlImage: user.image,
+                              bio: user.bio,
+                            );
+                          }),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: InkWell(
