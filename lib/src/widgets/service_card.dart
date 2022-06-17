@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
@@ -10,7 +9,8 @@ class ServiceCard extends StatelessWidget {
       {Key? key,
       required this.uid,
       required this.urlImage,
-      this.bio = '', this.user})
+      this.bio = '',
+      this.user})
       : super(key: key);
 
   void initState() {
@@ -47,9 +47,9 @@ class ServiceCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    // colorFilter: ColorFilter.mode(
-                    //     Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
-                    //     BlendMode.multiply),
+                    colorFilter: ColorFilter.mode(
+                        Color.fromARGB(255, 158, 155, 155).withOpacity(0.3),
+                        BlendMode.multiply),
                     image: NetworkImage(urlImage),
                     fit: BoxFit.cover,
                     alignment: const Alignment(-0.3, 0),

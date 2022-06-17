@@ -28,11 +28,12 @@ class ChatCard extends StatelessWidget {
               chat.tapped ? chat.dateFormatter(chat.ts.toDate()) : '',
               style: const TextStyle(
                 fontSize: 12,
+                color: Colors.grey,
               ),
             ),
           // Text(chat.tapped ? Moment.fromDateTime(chat.ts.toDate()).format('MMMM dd, yyyy hh:mm aa') : ''),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            padding: const EdgeInsets.only(left: 15.0, right: 15.0),
             child: Row(
               mainAxisAlignment: chat.sentBy != currentUserId
                   ? MainAxisAlignment.start
@@ -42,9 +43,14 @@ class ChatCard extends StatelessWidget {
                     future: ChatUser.fromUid(uid: chat.sentBy),
                     builder: (context, AsyncSnapshot<ChatUser> snap) {
                       if (snap.hasData) {
-                        return Text(chat.sentBy == currentUserId
-                            ? 'You sent:'
-                            : '${snap.data?.username} sent');
+                        return Text(
+                          chat.sentBy == currentUserId
+                              ? 'You sent:'
+                              : '${snap.data?.username} sent',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        );
                       }
 
                       return const Text('');
@@ -54,10 +60,10 @@ class ChatCard extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(
-                left: chat.sentBy == currentUserId ? 60 : 10,
-                bottom: 10,
+                left: chat.sentBy == currentUserId ? 100 : 10,
+                bottom: 15,
                 top: 10,
-                right: chat.sentBy == currentUserId ? 10 : 60),
+                right: chat.sentBy == currentUserId ? 10 : 100),
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -67,7 +73,9 @@ class ChatCard extends StatelessWidget {
                   bottomLeft: chat.sentBy == currentUserId
                       ? const Radius.circular(16)
                       : const Radius.circular(16),
-                  bottomRight: const Radius.circular(16),
+                  bottomRight: chat.sentBy == currentUserId
+                      ? const Radius.circular(30)
+                      : const Radius.circular(16),
                   topRight: chat.sentBy == currentUserId
                       ? const Radius.circular(0)
                       : const Radius.circular(16)),
@@ -103,8 +111,9 @@ class ChatCard extends StatelessWidget {
                               style: TextStyle(
                                   color: chat.sentBy == currentUserId
                                       ? Colors.white
-                                      : Colors.black,
-                                  letterSpacing: 0.5),
+                                      : Color.fromARGB(255, 20, 69, 78),
+                                  letterSpacing: 0.5,
+                                  fontFamily: 'Nunito'),
                             )),
 
                         Row(
