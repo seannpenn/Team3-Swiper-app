@@ -27,19 +27,21 @@ class ThreadCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.only(left: 30, top: 10, right: 10, bottom: 10),
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
+                  spreadRadius: 5,
                   blurRadius: 7,
                   offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30)),
+              border: Border.all(
+                  color: Color.fromARGB(255, 234, 234, 234), width: 2),
               color: Colors.teal[400]),
           child: Row(
             children: [

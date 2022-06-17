@@ -52,6 +52,9 @@ flutter:
     - family: Merriweather
       fonts:
         - asset: fonts/Merriweather-Regular.ttf
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-Bold.ttf
         
 
         

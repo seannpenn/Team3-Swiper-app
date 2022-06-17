@@ -67,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.teal[400],
         title: UserNameFromDB(uid: widget.toUser!),
       ),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color.fromARGB(255, 219, 239, 241),
       resizeToAvoidBottomInset: true,
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -114,24 +114,25 @@ class _ChatScreenState extends State<ChatScreen> {
                       },
                       focusNode: _messageFN,
                       controller: _messageController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                            icon: const Icon(
+                              Icons.send,
+                              color: Colors.teal,
+                            ),
+                            onPressed: () {
+                              // send();
+                            }),
                         fillColor: Colors.white,
-                        border: OutlineInputBorder(
+                        hintText: 'Add a message...',
+                        border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
-                            Radius.circular(8),
+                            Radius.circular(50),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  IconButton(
-                      icon: const Icon(
-                        Icons.send,
-                        color: Colors.teal,
-                      ),
-                      onPressed: () {
-                        send();
-                      })
                 ],
               ),
             )
