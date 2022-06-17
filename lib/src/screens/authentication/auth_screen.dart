@@ -97,7 +97,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Text('SwipeR',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 36,
+                                fontSize: 50,
                                 fontFamily: 'Sniglet'))),
                   ),
                   Positioned(
@@ -325,7 +325,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8.0),
+                                                                          20.0),
                                                             ),
                                                             padding:
                                                                 const EdgeInsets
@@ -338,8 +338,12 @@ class _AuthScreenState extends State<AuthScreen> {
                                                                         .currentState
                                                                         ?.validate() ??
                                                                     false)
-                                                                ? const Color(
-                                                                    0xFF303030)
+                                                                ? Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        20,
+                                                                        140,
+                                                                        149)
                                                                 : Colors.grey),
                                                     child: const Text('Log in'),
                                                   ),
@@ -594,20 +598,21 @@ class _AuthScreenState extends State<AuthScreen> {
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        8.0),
+                                                                        20.0),
                                                           ),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      50,
-                                                                  vertical: 20),
+                                                          padding: const EdgeInsets
+                                                                  .symmetric(
+                                                              horizontal: 50,
+                                                              vertical: 20),
                                                           primary: (_formKey
                                                                       .currentState
                                                                       ?.validate() ??
                                                                   false)
-                                                              ? const Color(
-                                                                  0xFF303030)
+                                                              ? Color.fromARGB(
+                                                                  255,
+                                                                  20,
+                                                                  140,
+                                                                  149)
                                                               : Colors.grey),
                                                   child: const Text('Register'),
                                                 )

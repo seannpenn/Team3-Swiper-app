@@ -1,12 +1,10 @@
 import 'dart:async';
 
-
 import 'package:flutter/material.dart';
 
 import 'package:swiper_app/src/models/chat_user_model.dart';
 
 class UserController with ChangeNotifier {
-  
   late StreamSubscription _userSub;
   late StreamSubscription _threadSub;
   List<ChatUser> users = [];
@@ -33,5 +31,4 @@ class UserController with ChangeNotifier {
     users = update;
     notifyListeners();
   }
-  
 }

@@ -89,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 20, bottom: 20),
                     child: Row(children: [
                       Expanded(
                           child: TextFormField(
@@ -124,27 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //     fontSize: 15,
                   //   ),
                   // ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 500,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40.0),
-                        color: Color.fromARGB(255, 158, 188, 188),
-                      ),
-                      child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              'Name',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                          )),
-                    ),
-                  ),
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -187,18 +167,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shadowColor: Color.fromARGB(255, 0, 0, 0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 500,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40.0),
+                        color: Color.fromARGB(255, 158, 188, 188),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 10),
+                      child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              'location',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            ),
+                          )),
                     ),
-                    child: const Text('Sign Out'),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   style: ElevatedButton.styleFrom(
+                  //     shadowColor: Color.fromARGB(255, 0, 0, 0),
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(30.0),
+                  //     ),
+                  //     padding: const EdgeInsets.symmetric(
+                  //         horizontal: 30, vertical: 10),
+                  //   ),
+                  //   child: const Text('Sign Out'),
+                  // ),
                 ],
               ),
             ),

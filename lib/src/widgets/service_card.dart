@@ -47,39 +47,57 @@ class ServiceCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.3), BlendMode.multiply),
+                    // colorFilter: ColorFilter.mode(
+                    //     Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+                    //     BlendMode.multiply),
                     image: NetworkImage(urlImage),
                     fit: BoxFit.cover,
                     alignment: const Alignment(-0.3, 0),
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 200, left: 20),
-                      child: const Text(
-                        'Gilben Ferolino',
-                        style: TextStyle(
-                            fontSize: 20,
+                child: Container(
+                  margin: EdgeInsets.only(top: 400, left: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          '@${user?.username}',
+                          style: const TextStyle(
+                            fontSize: 30,
                             color: Color.fromARGB(255, 249, 249, 249),
-                            backgroundColor: Colors.black),
+                            fontFamily: 'Merriweather',
+                          ),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 200, left: 20),
-                      child: Text(
-                        bio,
-                        style: const TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 249, 249, 249),
-                            backgroundColor: Colors.black),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          bio,
+                          style: const TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 249, 249, 249),
+                              fontFamily: 'Merriweather'),
+                        ),
                       ),
-                    ),
-                    // Text(uid)
-                  ],
+                      Row(
+                        children: [
+                          Icon(Icons.location_on, size: 15, color: Colors.red),
+                          Text(
+                            'location here',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 249, 249, 249),
+                              fontFamily: 'Merriweather',
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Text(uid)
+                    ],
+                  ),
                 ),
               ),
             ),
