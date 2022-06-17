@@ -106,8 +106,10 @@ class _FriendScreenState extends State<FriendScreen> {
                                   case DismissDirection.endToStart:
                                     if (mounted) {
                                       setState(() {
-                                        //filled.value
-                                        
+                                        snapshot.data!.createThread(
+                                            toUser:
+                                                snapshot.data!.request[index],
+                                            currentUser: snapshot.data!.uid);
                                       });
                                     }
                                     break;
