@@ -87,7 +87,7 @@ class ChatUser {
         .collection('users')
         .doc(currentUser)
         .update({
-      "friend": FieldValue.arrayRemove([userUid])
+      "friends": FieldValue.arrayRemove([userUid])
     });
   }
 

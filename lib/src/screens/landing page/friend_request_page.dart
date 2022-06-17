@@ -45,6 +45,7 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
@@ -74,22 +75,8 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text('Pending Request'),
-                            Icon(Icons.arrow_drop_down),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Requested to add you'),
-                      ),
                       SizedBox(
-                        height: 1920,
+                        height: (size.height / 100) * 80,
                         width: 1080,
                         child: snapshot.data!.request.isNotEmpty
                             ? ListView.builder(

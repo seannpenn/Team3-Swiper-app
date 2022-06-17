@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
@@ -10,7 +9,8 @@ class ServiceCard extends StatelessWidget {
       {Key? key,
       required this.uid,
       required this.urlImage,
-      this.bio = '', this.user})
+      this.bio = '',
+      this.user})
       : super(key: key);
 
   void initState() {

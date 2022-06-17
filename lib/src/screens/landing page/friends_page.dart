@@ -118,10 +118,12 @@ class _FriendScreenState extends State<FriendScreen> {
                                     break;
                                   case DismissDirection.startToEnd:
                                     if (mounted) {
+                                      print('oten' +
+                                          snapshot.data!.friends[index]);
+                                      print(snapshot.data!.uid);
                                       setState(() {
-                                        //filled.value
                                         snapshot.data!.deleteFriend(
-                                            snapshot.data!.request[index],
+                                            snapshot.data!.friends[index],
                                             snapshot.data!.uid);
                                       });
                                     }
