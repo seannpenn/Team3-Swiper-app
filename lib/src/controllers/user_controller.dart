@@ -9,9 +9,11 @@ class UserController with ChangeNotifier {
   late StreamSubscription _threadSub;
   List<ChatUser> users = [];
   List<ChatUser> threads = [];
+
   late LocationData currentLocation;
   late List<geo.Placemark> placemarks;
-  final StreamController<String?> _controller = StreamController();
+  final StreamController<String?> _controller =
+      StreamController<String?>.broadcast();
   Stream<String?> get stream => _controller.stream;
 
   UserController() {
