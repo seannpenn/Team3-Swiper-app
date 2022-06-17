@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatUser {
-  final String uid, username, email, image;
+  final String uid, username, email, image, bio;
   List<String> friends, request;
   Timestamp created, updated;
 
@@ -10,6 +10,7 @@ class ChatUser {
       required this.username,
       required this.email,
       required this.image,
+      this.bio = '',
       this.friends = const [],
       this.request = const [],
       created,
@@ -30,6 +31,7 @@ class ChatUser {
       username: json['username'] ?? '',
       email: json['email'] ?? '',
       image: json['image'] ?? " ",
+      bio: json['bio'] ?? "",
       created: json['created'] ?? Timestamp.now(),
       updated: json['updated'] ?? Timestamp.now(),
     );
@@ -46,6 +48,7 @@ class ChatUser {
         'username': username,
         'email': email,
         'image': image,
+        'bio': bio,
         'friends': friends,
         'request': request,
         'created': created,
@@ -75,6 +78,22 @@ class ChatUser {
         .update({
       "request": FieldValue.arrayRemove([userUid])
     });
+  }
+
+  Future deleteFriend(String userUid, String currentUser) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .update({
+      "friend": FieldValue.arrayRemove([userUid])
+    });
+  }
+
+  Future addBio(String userBio) {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({"bio": userBio});
   }
 
   static Stream<ChatUser> fromUidStream({required String uid}) {
