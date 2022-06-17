@@ -88,6 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+
                   Container(
                     margin: const EdgeInsets.only(top: 20, bottom: 20),
                     child: Row(children: [
@@ -116,14 +117,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       )),
                     ]),
                   ),
-
-                  //testingDisplay
-                  // Text(
-                  //   '${_bioController.text}',
-                  //   style: const TextStyle(
-                  //     fontSize: 15,
-                  //   ),
-                  // ),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),

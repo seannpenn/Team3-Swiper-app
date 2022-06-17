@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   ChatUser? currentUser;
   ServiceCard? card;
-  List<String> users = [];
 
   @override
   void initState() {
@@ -38,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
-    getUsers();
     super.initState();
   }
 
@@ -61,22 +59,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 fit: StackFit.loose,
                 children: [
                   for (ChatUser user in _userController.users)
-                    for (int i = 0; i < users.length; i++)
-                      if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
-                          user.image != '' &&
-                          user.friends.contains(users[i]) &&
-                          user.request.contains(users[i]))
-                        ServiceCard(
-                          user: user,
-                          uid: user.uid,
-                          urlImage: user.image,
-                          bio: user.bio,
-                        ),
+                    if (user.uid != FirebaseAuth.instance.currentUser!.uid &&
+                        user.image != '' &&
+                        !currentUser!.friends.contains(user.uid) &&
+                        !user.request.contains(currentUser!.uid))
+                      ServiceCard(
+                        user: currentUser,
+                        uid: user.uid,
+                        urlImage: user.image,
+                        bio: user.bio,
+                      ),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: InkWell(
-                      onTap: () {
-                      },
+                      onTap: () {},
                       child: const Icon(
                         Icons.replay_circle_filled,
                         size: 40,
@@ -89,13 +85,5 @@ class _HomeScreenState extends State<HomeScreen> {
             }),
       ),
     );
-  }
-
-  getUsers() {
-    userRef.get().then((QuerySnapshot snapshot) {
-      for (var doc in snapshot.docs) {
-        users.add(doc.id);
-      }
-    });
   }
 }

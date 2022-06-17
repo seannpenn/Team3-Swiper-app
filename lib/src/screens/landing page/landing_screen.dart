@@ -120,23 +120,26 @@ class _LandingScreenState extends State<LandingScreen> {
                     //         .replaceLastRouteStackRecord(HomeScreen.route);
                     //   },
                     // ),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.add,
-                        size: 40,
+                    Container(
+                      margin: const EdgeInsets.only(top: 50),
+                      child: ListTile(
+                        leading: const Icon(
+                          Icons.add,
+                          size: 40,
+                        ),
+                        title: const Center(child: Text('Requests')),
+                        // subtitle: const Text("This is the 1st item"),
+                        trailing: const Icon(Icons.more_vert),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const FriendRequestScreen()),
+                          );
+                          print('Requests tapped');
+                        },
                       ),
-                      title: const Center(child: Text('Requests')),
-                      // subtitle: const Text("This is the 1st item"),
-                      trailing: const Icon(Icons.more_vert),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const FriendRequestScreen()),
-                        );
-                        print('Requests tapped');
-                      },
                     ),
                     ListTile(
                       leading: const Icon(
@@ -171,7 +174,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(35),
                       topRight: Radius.circular(35)),

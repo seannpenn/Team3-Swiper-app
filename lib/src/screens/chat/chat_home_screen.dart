@@ -41,7 +41,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color.fromARGB(255, 219, 239, 241),
       resizeToAvoidBottomInset: true,
       body: Container(
         padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
