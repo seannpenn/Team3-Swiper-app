@@ -164,6 +164,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             child: InputWidget(
+              toUser: widget.toUser!,
               current: chatMessage.message,
               chat: chatMessage,
             ),
@@ -254,7 +255,8 @@ class _ChatScreenState extends State<ChatScreen> {
               TextButton(
                   onPressed: () {
                     // Remove the box
-                    chatMessage.deleteMessage();
+                    chatMessage.deleteMessage(
+                        widget.toUser!, _auth.currentUser!.uid);
                     // Close the dialog
                     Navigator.of(context).pop();
                   },

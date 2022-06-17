@@ -70,17 +70,45 @@ class ChatMessage {
           .snapshots()
           .map(ChatMessage.fromQuerySnap);
 
-  updateDetails(String update) {
+  updateDetails(String update, String toUser, String currentUser) {
+    print(toUser);
+    print(currentUser);
     FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
         .collection('chats')
+        .doc(toUser)
+        .collection('messages')
+        .doc(uid)
+        .update({'message': update, 'edited': true});
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .collection('chats')
+        .doc(toUser)
+        .collection('messages')
         .doc(uid)
         .update({'message': update, 'edited': true});
     print('done update');
   }
 
-  deleteMessage() {
+  deleteMessage(String toUser, String currentUser) {
+    print(toUser);
+    print(currentUser);
     FirebaseFirestore.instance
+        .collection('users')
+        .doc(toUser)
         .collection('chats')
+        .doc(currentUser)
+        .collection('messages')
+        .doc(uid)
+        .update({'message': 'Message Deleted.'});
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .collection('chats')
+        .doc(toUser)
+        .collection('messages')
         .doc(uid)
         .update({'message': 'Message Deleted.'});
     print('message with $uid is deleted.');
