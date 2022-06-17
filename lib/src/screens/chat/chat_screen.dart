@@ -138,7 +138,8 @@ class _ChatScreenState extends State<ChatScreen> {
   send() {
     _messageFN.unfocus();
     if (_messageController.text.isNotEmpty) {
-      _chatController.sendMessage(message: _messageController.text.trim());
+      _chatController.sendMessageGlobal(
+          message: _messageController.text.trim());
       _messageController.text = '';
     }
   }

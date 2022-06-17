@@ -48,7 +48,7 @@ class ChatUser {
         'username': username,
         'email': email,
         'image': image,
-        'bio' : bio,
+        'bio': bio,
         'friends': friends,
         'request': request,
         'created': created,

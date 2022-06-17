@@ -4,13 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:swiper_app/src/controllers/user_controller.dart';
 import 'package:swiper_app/src/models/chat_user_model.dart';
-<<<<<<< Updated upstream
 import 'package:swiper_app/src/widgets/avatars.dart';
-
-=======
->>>>>>> Stashed changes
-import 'package:swiper_app/src/widgets/service_card.dart';
-
 import '../../../service_locators.dart';
 import '../../controllers/auth_controller.dart';
 
@@ -81,7 +75,7 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: (){},
+                        onTap: () {},
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: const [
@@ -110,16 +104,16 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                         key: ObjectKey(request),
                                         background: Container(
                                           alignment: Alignment.centerLeft,
-                                          padding:
-                                              EdgeInsets.symmetric(horizontal: 20),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
                                           color: Colors.orange,
                                           child: Icon(Icons.check,
                                               color: Colors.white, size: 32),
                                         ),
                                         secondaryBackground: Container(
                                           alignment: Alignment.centerRight,
-                                          padding:
-                                              EdgeInsets.symmetric(horizontal: 20),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
                                           color: Colors.red,
                                           child: Icon(Icons.close,
                                               color: Colors.white, size: 32),
@@ -131,7 +125,8 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                                 setState(() {
                                                   //filled.value
                                                   snapshot.data!.declineRequest(
-                                                      snapshot.data!.request[index],
+                                                      snapshot
+                                                          .data!.request[index],
                                                       snapshot.data!.uid);
                                                 });
                                               }
@@ -141,7 +136,8 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                                 setState(() {
                                                   //filled.value
                                                   snapshot.data!.acceptRequest(
-                                                      snapshot.data!.request[index],
+                                                      snapshot
+                                                          .data!.request[index],
                                                       snapshot.data!.uid);
                                                 });
                                               }
@@ -166,13 +162,16 @@ class _FriendRequestScreenState extends State<FriendRequestScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               AvatarImage(
-                                                uid: snapshot.data!.request[index],
+                                                uid: snapshot
+                                                    .data!.request[index],
                                                 radius: 20,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(10.0),
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
                                                 child: UserNameFromDB(
-                                                  uid: snapshot.data!.request[index],
+                                                  uid: snapshot
+                                                      .data!.request[index],
                                                 ),
                                               ),
                                               // Text(

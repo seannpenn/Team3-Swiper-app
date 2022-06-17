@@ -18,7 +18,6 @@ class ChatHomeScreen extends StatefulWidget {
 
 class _ChatHomeScreenState extends State<ChatHomeScreen> {
   final ChatController _chatController = ChatController();
-
   final ScrollController _scrollController = ScrollController();
   ChatCard? card;
   // int _selectedIndex = 0;
@@ -40,7 +39,7 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
   scrollToBottom() async {
     await Future.delayed(const Duration(milliseconds: 250));
     // print('scrolling to bottom');
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+    _scrollController.animateTo(_scrollController.position.minScrollExtent,
         curve: Curves.easeIn, duration: const Duration(milliseconds: 250));
   }
 
